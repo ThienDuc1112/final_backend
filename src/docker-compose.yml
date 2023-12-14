@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  providerdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
+  provider.api:
+    image: ${DOCKER_REGISTRY-}providerapi
+    build:
+      context: .
+      dockerfile: Services/Provider/Provider.API/Dockerfile
