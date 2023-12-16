@@ -10,5 +10,6 @@ namespace Provider.Application.Contracts.Persistence
     public interface ISkillRepository : IGenericRepository<Skill>
     {
         Task<IEnumerable<Skill>> GetSkillsByCarrerId(int carrerId);
+        Task<bool> IsExisted(string nameSkill);
     }
 }

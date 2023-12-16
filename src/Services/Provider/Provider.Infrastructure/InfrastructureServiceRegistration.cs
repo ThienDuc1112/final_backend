@@ -18,7 +18,11 @@ namespace Provider.Infrastructure
         {
             services.AddDbContext<ProviderDbContext>(
                 options =>
-                options.UseSqlServer(configuration.GetConnectionString("ProviderConnectionString")));
+                {
+                    options.UseSqlServer(configuration.GetConnectionString("ProviderConnectionString"));
+                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                });
+
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ICareerRepository, CareerRepository>();

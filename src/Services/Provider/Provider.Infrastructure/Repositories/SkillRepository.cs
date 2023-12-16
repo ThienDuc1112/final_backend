@@ -30,5 +30,10 @@ namespace Provider.Infrastructure.Repositories
 
         }
 
+        public async Task<bool> IsExisted(string nameSkill)
+        {
+            var skill = await _dbcontext.Skills.AnyAsync(s => s.NameSkill == nameSkill);
+            return skill;
+        }
     }
 }

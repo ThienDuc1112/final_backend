@@ -14,12 +14,12 @@ namespace Provider.Infrastructure.Persistance
         {
             if (!providerDbContext.Careers.Any())
             {
-                providerDbContext.Careers.AddRange(GetPreconfiguredOrders());
+                providerDbContext.Careers.AddRange(GetCareer());
                 await providerDbContext.SaveChangesAsync();
             }
         }
 
-        private static IEnumerable<Career> GetPreconfiguredOrders()
+        private static IEnumerable<Career> GetCareer()
         {
             return new List<Career>
             {
@@ -27,5 +27,6 @@ namespace Provider.Infrastructure.Persistance
                 IsAllowed = true}
             };
         }
+     
     }
 }

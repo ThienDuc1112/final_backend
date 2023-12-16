@@ -26,7 +26,7 @@ namespace Provider.API.Extensions
 
                 if (dbContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
                 {
-                    dbContext.Database.Migrate();
+                    dbContext.Database.EnsureCreated();
                 }
                 ProviderContextSeed.SeedAsync(dbContext).Wait();
             }

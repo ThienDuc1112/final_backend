@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Provider.Application.DTOs.Career;
+using Provider.Application.DTOs.Skill;
 using Provider.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace Provider.Application.Mappings
         {
             CreateMap<Career, CareerDTO>().ReverseMap();
             CreateMap<Career, CreateCareerDTO>().ReverseMap();
+            CreateMap<Career, UpdateCareerDTO>().ReverseMap();
+
+            CreateMap<Skill, SkillDTO>()
+                .ForMember(dest => dest.CareerDTO, act => act.MapFrom(src => src.Career)).ReverseMap();
+            CreateMap<Skill, CreateSkillDTO>().ReverseMap();
+                //.ForMember(dest => dest.CareerId, act => act.MapFrom(src => src.Career.Id))
+                //.ReverseMap();
+            CreateMap<Skill, UpdateSkillDTO>().ReverseMap();
         }
     }
 }

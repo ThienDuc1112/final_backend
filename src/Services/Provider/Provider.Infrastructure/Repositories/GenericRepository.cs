@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Provider.Application.Contracts.Persistence;
 using Provider.Infrastructure.Persistance;
 using System;
@@ -20,7 +21,8 @@ namespace Provider.Infrastructure.Repositories
 
         public async Task<T> Add(T entity)
         {
-            await _providerDbContext.Set<T>().AddAsync(entity);
+            _providerDbContext.Entry(entity).State = EntityState.Detached;
+            _providerDbContext.Set<T>().Add(entity);
             await _providerDbContext.SaveChangesAsync();
             return entity;
         }
@@ -29,6 +31,12 @@ namespace Provider.Infrastructure.Repositories
         {
             _providerDbContext.Set<T>().Remove(entity);
             await _providerDbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            var entity = await GetById(id);
+            return entity != null;
         }
 
         public async Task<IReadOnlyList<T>> GetAll()
