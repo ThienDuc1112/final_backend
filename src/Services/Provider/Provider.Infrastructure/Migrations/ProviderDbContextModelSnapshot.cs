@@ -58,6 +58,42 @@ namespace Provider.Infrastructure.Migrations
                     b.ToTable("Careers");
                 });
 
+            modelBuilder.Entity("Provider.Domain.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
             modelBuilder.Entity("Provider.Domain.Entities.Skill", b =>
                 {
                     b.Property<int>("Id")

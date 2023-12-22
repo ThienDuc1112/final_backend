@@ -22,6 +22,7 @@ namespace Provider.Infrastructure.Persistance
 
         public DbSet<Career> Careers { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
     }
 }

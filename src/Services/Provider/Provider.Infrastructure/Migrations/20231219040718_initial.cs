@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Provider.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,6 +28,25 @@ namespace Provider.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Careers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Level = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,6 +82,9 @@ namespace Provider.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Languages");
+
             migrationBuilder.DropTable(
                 name: "Skills");
 

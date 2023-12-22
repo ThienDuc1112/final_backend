@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Provider.Application.Contracts.Persistence;
 using Provider.Infrastructure.Persistance;
 using Provider.Infrastructure.Repositories;
@@ -27,6 +28,7 @@ namespace Provider.Infrastructure
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ICareerRepository, CareerRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
 
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Provider.Application.DTOs.Career;
+using Provider.Application.DTOs.Language;
 using Provider.Application.DTOs.Skill;
 using Provider.Domain.Entities;
 using System;
@@ -21,9 +22,10 @@ namespace Provider.Application.Mappings
             CreateMap<Skill, SkillDTO>()
                 .ForMember(dest => dest.CareerDTO, act => act.MapFrom(src => src.Career)).ReverseMap();
             CreateMap<Skill, CreateSkillDTO>().ReverseMap();
-                //.ForMember(dest => dest.CareerId, act => act.MapFrom(src => src.Career.Id))
-                //.ReverseMap();
             CreateMap<Skill, UpdateSkillDTO>().ReverseMap();
+
+            CreateMap<Language, LanguageDTO>().ReverseMap();
+            CreateMap<Language, CreateLanguageDTO>().ReverseMap();
         }
     }
 }

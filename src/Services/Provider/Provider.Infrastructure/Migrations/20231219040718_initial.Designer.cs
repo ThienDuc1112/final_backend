@@ -12,8 +12,8 @@ using Provider.Infrastructure.Persistance;
 namespace Provider.Infrastructure.Migrations
 {
     [DbContext(typeof(ProviderDbContext))]
-    [Migration("20231209032042_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231219040718_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,42 @@ namespace Provider.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Careers");
+                });
+
+            modelBuilder.Entity("Provider.Domain.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Provider.Domain.Entities.Skill", b =>
