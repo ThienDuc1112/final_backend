@@ -11,8 +11,8 @@ namespace Candidate.Domain.Entities
     {
         public int Id { get; set; }
         public int LanguageId { get; set; }
-        public int ResumeId { get; set; }
         [ForeignKey("ResumeId")]
+        public int ResumeId { get; set; }
         public Resume Resume { get; set; }
     }
 }

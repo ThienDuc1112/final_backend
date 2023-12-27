@@ -10,6 +10,6 @@ namespace Provider.Application.Features.Careers.Queries.GetCareerList
 {
     public class GetCareerListQuery :IRequest<List<CareerDTO>>
     {
-
+        
     }
 }

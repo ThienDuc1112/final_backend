@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,26 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Candidate.Domain\Candidate.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.18.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.40.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.40.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\Provider\Provider.Grpc\Protos\career.proto" GrpcServices="Client">
+      <Link>Protos\career.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

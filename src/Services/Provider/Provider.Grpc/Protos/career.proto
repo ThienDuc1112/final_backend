@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Provider.Grpc.Protos";
+
+service CareerProtoService {
+	rpc GetCareer (GetCareerRequest) returns (CareerModel);
+}
+
+message GetCareerRequest {
+	int32 careerId = 1;
+}
+
+message CareerModel {
+	int32 id = 1;
+	string name = 2;
+}

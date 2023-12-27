@@ -19,13 +19,15 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Candidate", "Candidate", "{C0AD6C97-60E4-4ABE-94B9-EC9AD461F74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidate.API", "Services\Candidate\Candidate.API\Candidate.API.csproj", "{5F07E7B0-844C-4A0C-A36F-34F13D9A5D7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.API", "Services\Candidate\Candidate.API\Candidate.API.csproj", "{5F07E7B0-844C-4A0C-A36F-34F13D9A5D7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidate.Domain", "Services\Candidate\Candidate.Domain\Candidate.Domain.csproj", "{5F840960-872F-4A8C-AA61-82707A0779FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Domain", "Services\Candidate\Candidate.Domain\Candidate.Domain.csproj", "{5F840960-872F-4A8C-AA61-82707A0779FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidate.Application", "Services\Candidate\Candidate.Application\Candidate.Application.csproj", "{2F1F7604-C94B-43E1-8FC8-9432C8BA98CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Application", "Services\Candidate\Candidate.Application\Candidate.Application.csproj", "{2F1F7604-C94B-43E1-8FC8-9432C8BA98CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidate.Infrastructure", "Services\Candidate\Candidate.Infrastructure\Candidate.Infrastructure.csproj", "{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Infrastructure", "Services\Candidate\Candidate.Infrastructure\Candidate.Infrastructure.csproj", "{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.Grpc", "Services\Provider\Provider.Grpc\Provider.Grpc.csproj", "{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{5F840960-872F-4A8C-AA61-82707A0779FE} = {C0AD6C97-60E4-4ABE-94B9-EC9AD461F74F}
 		{2F1F7604-C94B-43E1-8FC8-9432C8BA98CE} = {C0AD6C97-60E4-4ABE-94B9-EC9AD461F74F}
 		{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7} = {C0AD6C97-60E4-4ABE-94B9-EC9AD461F74F}
+		{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E} = {E831100C-0E1C-4DE0-8DC3-180FA5799688}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77094968-D1B1-4E9A-B2A7-95F6437BAD83}
