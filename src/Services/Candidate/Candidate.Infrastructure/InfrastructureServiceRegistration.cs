@@ -20,6 +20,8 @@ namespace Candidate.Infrastructure
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IResumeRepository, ResumeRepository>();
+            services.AddScoped<IEducationRepository, EducationRepository>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
 
             return services;
         }

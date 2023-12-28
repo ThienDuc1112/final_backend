@@ -30,4 +30,8 @@
     </Protobuf>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Educations\Queries\" />
+  </ItemGroup>
+
 </Project>
