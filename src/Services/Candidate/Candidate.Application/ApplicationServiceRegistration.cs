@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Provider.Grpc.Protos;
 using Microsoft.Extensions.Configuration;
 using Candidate.Application.GrpcServices;
+using Candidate.Application.Mappings;
 
 namespace Candidate.Application
 {
@@ -20,7 +21,13 @@ namespace Candidate.Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddGrpcClient<CareerProtoService.CareerProtoServiceClient>
                 (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
+            services.AddGrpcClient<SkillProtoService.SkillProtoServiceClient>
+                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
+            services.AddGrpcClient<LanguageProtoService.LanguageProtoServiceClient>
+                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
             services.AddScoped<CareerGrpcService>();
+            services.AddScoped<SkillGrpcService>();
+            services.AddScoped<LanguageGrpcService>();
 
             return services;
         }

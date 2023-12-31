@@ -14,14 +14,15 @@ namespace Candidate.Infrastructure
             services.AddDbContext<CandidateDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("CandidateConnectionString"));
-                    //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-                });
+                    options.UseSqlServer(configuration.GetConnectionString("CandidateConnectionString"));            
+                }, ServiceLifetime.Transient);
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IResumeRepository, ResumeRepository>();
             services.AddScoped<IEducationRepository, EducationRepository>();
             services.AddScoped<IExperienceRepository, ExperienceRepository>();
+            services.AddScoped<ISkillOfResumeRepository, SkillOfResumeRepository>();
+            services.AddScoped<ILanguageOfResumeRepository, LanguageOfResumeRepository>();
 
             return services;
         }

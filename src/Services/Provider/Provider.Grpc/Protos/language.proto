@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Provider.Grpc.Protos";
+
+service LanguageProtoService {
+	rpc GetLanguage (GetLanguageRequest) returns (LanguageModel);
+}
+
+message GetLanguageRequest {
+	int32 languageId = 1;
+}
+
+message LanguageModel {
+	int32 id = 1;
+	string languageName = 2;
+	string level = 3;
+}

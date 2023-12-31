@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="Protos\career.proto" />
+    <None Remove="Protos\language.proto" />
+    <None Remove="Protos\skill.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +24,8 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\career.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\language.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\skill.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

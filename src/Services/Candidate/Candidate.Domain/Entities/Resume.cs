@@ -24,8 +24,10 @@ namespace Candidate.Domain.Entities
         public bool IsPublic { get; set; } = true;
         public string Title { get; set; }
 
-        public ICollection<LanguageOfResume> Languages { get; set; }
-        public ICollection<SkillOfResume> Skills { get; set; }
+        public List<LanguageOfResume> Languages { get; set; }
+        public List<SkillOfResume> Skills { get; set; }
+        public List<Education> Educations { get; set; }
+        public List<Experience> Experiences { get; set; }
 
     }
 }

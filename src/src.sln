@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Application", "Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Infrastructure", "Services\Candidate\Candidate.Infrastructure\Candidate.Infrastructure.csproj", "{A2EBB048-31C6-4A91-84DC-CDA33E2E34A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.Grpc", "Services\Provider\Provider.Grpc\Provider.Grpc.csproj", "{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Grpc", "Services\Provider\Provider.Grpc\Provider.Grpc.csproj", "{7A15A324-B1AF-4F4A-9FEA-748B7FDC308E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

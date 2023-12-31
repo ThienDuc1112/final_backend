@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Provider.Grpc.Protos";
+
+service SkillProtoService {
+	rpc GetSkill (GetSkillRequest) returns (SkillModel);
+}
+
+message GetSkillRequest {
+	int32 skillId = 1;
+}
+
+message SkillModel {
+	int32 id = 1;
+	string nameSkill = 2;
+}

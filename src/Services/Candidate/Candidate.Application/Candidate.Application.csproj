@@ -25,13 +25,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\Provider\Provider.Grpc\Protos\career.proto" GrpcServices="Client">
-      <Link>Protos\career.proto</Link>
-    </Protobuf>
+    <Folder Include="Features\Educations\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Educations\Queries\" />
+    <Protobuf Include="..\..\Provider\Provider.Grpc\Protos\career.proto" GrpcServices="Client">
+      <Link>Protos\career.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\Provider\Provider.Grpc\Protos\language.proto" GrpcServices="Client">
+      <Link>Protos\language.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\Provider\Provider.Grpc\Protos\skill.proto" GrpcServices="Client">
+      <Link>Protos\skill.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Candidate.Domain.Entities;
+﻿using Candidate.Application.DTOs.Resume;
+using Candidate.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace Candidate.Application.Contracts.Persistence
         Task<string> ProvideGender();
 
         Task<string> ProvideData();
+        Task<Resume> FindResumeById(int id);
     }
 }
