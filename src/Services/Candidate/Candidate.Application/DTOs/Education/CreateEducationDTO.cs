@@ -11,6 +11,7 @@ namespace Candidate.Application.DTOs.Education
         public string UniversityName { get; set; }
         public string Degree { get; set; }
         public string Major { get; set; }
+        public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int ResumeId { get; set; }
