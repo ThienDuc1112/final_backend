@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Domain.Entities
+namespace Business.Application.DTOs.Media
 {
-    public class Media
+    public class MediaDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
-        [ForeignKey("BusinessId")]
         public int BusinessId { get; set; }
-        public BusinessInfor Business { get; set; }
     }
 }

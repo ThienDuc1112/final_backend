@@ -13,6 +13,6 @@ namespace Business.Domain.Entities
         public int CareerId { get; set; }
         [ForeignKey("BusinessId")]
         public int BusinessId { get; set; }
-        public Business Business { get; set; }
+        public BusinessInfor Business { get; set; }
     }
 }

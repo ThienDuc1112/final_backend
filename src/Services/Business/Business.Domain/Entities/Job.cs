@@ -31,6 +31,6 @@ namespace Business.Domain.Entities
         public string? RequiredSkills { get; set; }
         public string Responsibilities { get; set; }
         public string Status { get; set; } = "active";
-        public Business Business { get; set; }
+        public BusinessInfor Business { get; set; }
     }
 }

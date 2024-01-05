@@ -10,5 +10,6 @@ namespace Business.Application.Contracts
     public interface IAreaRepository : IGenericRepository<Area>
     {
         Task<List<Area>> GetAreasByBusinessId(int id);
+        Task<bool> IsExisted(int businessId, int careerId);
     }
 }
