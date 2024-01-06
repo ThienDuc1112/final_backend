@@ -30,6 +30,7 @@ namespace Business.Application.DTOs.BusinessInfor
 
         public List<AreaDTO> AreaDTOs { get; set; } = new List<AreaDTO>();
         public List<MediaDTO> ImagesDTOs { get; set; } = new List<MediaDTO>();
-        
+        public List<MediaDTO> VideosDTOs { get; set; } = new List<MediaDTO>();
+
     }
 }

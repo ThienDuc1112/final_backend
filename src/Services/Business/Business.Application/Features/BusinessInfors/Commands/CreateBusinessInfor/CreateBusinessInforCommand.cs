@@ -1,4 +1,5 @@
-﻿using Business.Application.DTOs.BusinessInfor;
+﻿using Business.Application.DTOs.Area;
+using Business.Application.DTOs.BusinessInfor;
 using Business.Application.Responses;
 using MediatR;
 using System;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessInfor
 {
-    public class CreateBusinessInforCommand : IRequest<BaseCommandResponse>
+    public class CreateBusinessInforCommand : IRequest<List<BaseCommandResponse>>
     {
         public CreateBusinessInforDTO BusinessInforDTO { get; set; }
+        public List<CreateAreaDTO> AreaDTOs { get; set; }
     }
 }

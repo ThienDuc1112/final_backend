@@ -24,7 +24,10 @@ namespace Business.Domain.Entities
         public string? LinkedInUrl { get; set; }
         public string Address { get; set; }
         public string? Description { get; set; }
-        public bool IsApproved { get; set; } = false;
+        public string IsApproved { get; set; } = "processing";
         public string UserId { get; set; }
+
+        public List<Area> Areas { get; set; }
+        public List<Media> Medias { get; set; }
     }
 }

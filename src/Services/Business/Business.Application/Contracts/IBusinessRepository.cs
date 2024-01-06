@@ -9,7 +9,7 @@ namespace Business.Application.Contracts
 {
     public interface IBusinessRepository : IGenericRepository<BusinessInfor>
     {
-        Task AcceptOrReject(int businessId);
+        Task AcceptOrReject(BusinessInfor businessInfor);
         Task GetBusinessInforWithRelevant(int businessId);
     }
 }

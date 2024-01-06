@@ -1,17 +1,10 @@
-﻿using Business.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Business.Domain.Entities
+namespace Business.Application.DTOs.Job
 {
-    public class Job : EntityBase
+    public class CreateJobDTO
     {
         public int CareerId { get; set; }
-        [ForeignKey("BusinessId")]
         public int BusinessId { get; set; }
         public string Title { get; set; }
         public int NumberRecruitment { get; set; }
@@ -31,6 +24,5 @@ namespace Business.Domain.Entities
         public string? RequiredSkills { get; set; }
         public string Responsibilities { get; set; }
         public string Status { get; set; }
-        public BusinessInfor Business { get; set; }
     }
 }

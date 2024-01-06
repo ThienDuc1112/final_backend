@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Application.DTOs.Area;
 using Business.Application.DTOs.BusinessInfor;
+using Business.Application.DTOs.Job;
 using Business.Application.DTOs.Media;
 using Business.Domain.Entities;
 using System;
@@ -22,6 +23,11 @@ namespace Business.Application.Mappings
             CreateMap<BusinessInfor, CreateBusinessInforDTO>().ReverseMap();
 
             CreateMap<Media, MediaDTO>().ReverseMap();
+            CreateMap<Media, UploadMediaDTO>().ReverseMap();
+
+            CreateMap<Job, JobDTO>().ReverseMap();
+            CreateMap<Job, CreateJobDTO>().ReverseMap();
+            CreateMap<Job, UpdateJobDTO>().ReverseMap();
         }
     }
 }
