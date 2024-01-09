@@ -1,6 +1,7 @@
 ﻿using Business.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,16 @@ namespace Business.Domain.Entities
         public string? FaceBookUrl { get; set; }
         public string? LinkedInUrl { get; set; }
         public string Address { get; set; }
+        public string? latitude { get; set; }
+        public string? longitude { get; set; }
         public string? Description { get; set; }
         public string IsApproved { get; set; } = "processing";
         public string UserId { get; set; }
 
         public List<Area> Areas { get; set; }
-        public List<Media> Medias { get; set; }
+        [NotMapped]
+        public List<Media> Pictures { get; set; }
+        [NotMapped]
+        public List<Media> Videos { get; set; }
     }
 }
