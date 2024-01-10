@@ -22,8 +22,14 @@ namespace Business.Application
 
             services.AddGrpcClient<CareerProtoService.CareerProtoServiceClient>
                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
+            services.AddGrpcClient<LanguageProtoService.LanguageProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
+            services.AddGrpcClient<SkillProtoService.SkillProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
 
             services.AddScoped<CareerGrpcService>();
+            services.AddScoped<LanguageGrpcService>();
+            services.AddScoped<SkillGrpcService>();
 
             return services;
         }
