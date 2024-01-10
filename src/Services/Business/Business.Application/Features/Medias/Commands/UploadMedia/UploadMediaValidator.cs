@@ -12,15 +12,15 @@ namespace Business.Application.Features.Medias.Commands.UploadMedia
     {
         public UploadMediaValidator()
         {
-            RuleFor(m => m.BusinessId).NotNull().WithMessage("FullName is required.")
-              .NotEmpty().WithMessage("FullName cannot be empty.");
+            RuleFor(m => m.BusinessId).NotNull().WithMessage("BusinessId is required.")
+              .NotEmpty().WithMessage("BusinessId cannot be empty.");
 
-            RuleFor(m => m.Name).NotNull().WithMessage("FullName is required.")
-              .NotEmpty().WithMessage("FullName cannot be empty.");
+            RuleFor(m => m.Name).NotNull().WithMessage("Name is required.")
+              .NotEmpty().WithMessage("Name cannot be empty.");
 
-            RuleFor(m => m.Type).NotNull().WithMessage("FullName is required.")
-              .NotEmpty().WithMessage("FullName cannot be empty.")
-              .MaximumLength(50).WithMessage("FullName must not exceed 50 characters.");
+            RuleFor(m => m.Type).NotNull().WithMessage("Type is required.")
+              .NotEmpty().WithMessage("Type cannot be empty.")
+              .MaximumLength(50).WithMessage("Type must not exceed 50 characters.");
         }
     }
 }

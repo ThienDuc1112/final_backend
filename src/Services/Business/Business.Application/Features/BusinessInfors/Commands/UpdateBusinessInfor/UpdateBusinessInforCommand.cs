@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.Application.Features.BusinessInfors.Commands.UpdateBusinessInfor
 {
-    public class UpdateBusinessInforCommand :IRequest<BaseCommandResponse>
+    public class UpdateBusinessInforCommand :IRequest<Unit>
     {
         public UpdateBusinessInforDTO BusinessInforDTO { get; set; }
     }

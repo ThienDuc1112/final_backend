@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Business.Application.DTOs.Area;
+using Business.Application.DTOs.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,8 @@ namespace Business.Application.DTOs.BusinessInfor
         public string LinkedInUrl { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+
+        public List<CreateAreaDTO> AreaDTOs { get; set; }
+        public List<UploadMediaDTO> MediaDTOs { get; set; }
     }
 }

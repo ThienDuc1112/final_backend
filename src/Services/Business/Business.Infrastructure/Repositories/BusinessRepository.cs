@@ -25,7 +25,7 @@ namespace Business.Infrastructure.Repositories
         }
 
 
-        public async Task GetBusinessInforWithRelevant(int businessId)
+        public async Task<BusinessInfor> GetBusinessInforWithRelevant(int businessId)
         {
             var business = _dbContext.Businesses.Where(b => b.Id == businessId)
                 .Select(b => new BusinessInfor
@@ -41,30 +41,30 @@ namespace Business.Infrastructure.Repositories
                     FaceBookUrl = b.FaceBookUrl,
                     WebsiteUrl = b.WebsiteUrl,
                     LogoUrl = b.LogoUrl,
-                    LinkedInUrl = b.LinkedInUrl,       
+                    LinkedInUrl = b.LinkedInUrl,
                     FoundedYear = b.FoundedYear,
                     LicenseBack = b.LicenseBack,
-                    LicenseFont = b.LicenseFont,     
+                    LicenseFont = b.LicenseFont,
                     TaxCode = b.TaxCode,
+                    latitude = b.latitude,
+                    longitude = b.longitude,
+                    UserId = b.UserId,
+                    CreatedDate = b.CreatedDate,
                     Areas = b.Areas.Select(a => new Area
                     {
                         Id = a.Id,
                         CareerId = a.CareerId,
                     }).ToList(),
-                    Pictures = b.Pictures.Where(b => b.Type == "picture")
-                    .Select(p => new Media{
-                        Id = p.Id,
-                        Name = p.Name,
-                    }).ToList(),
-                    Videos = b.Videos.Where(b => b.Type == "video")
+                    Medias = b.Medias
                     .Select(p => new Media
                     {
                         Id = p.Id,
                         Name = p.Name,
+                        Type = p.Type,
                     }).ToList(),
-                })
-            ;
+                }).FirstOrDefaultAsync();
             
+            return await business;
         }
     }
 }

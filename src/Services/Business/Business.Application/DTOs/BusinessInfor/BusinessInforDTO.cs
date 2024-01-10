@@ -26,11 +26,13 @@ namespace Business.Application.DTOs.BusinessInfor
         public string FaceBookUrl { get; set; }
         public string LinkedInUrl { get; set; }
         public string Address { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
         public string Description { get; set; }
+        public string UserId { get; set; }
 
-        public List<AreaDTO> AreaDTOs { get; set; } = new List<AreaDTO>();
-        public List<MediaDTO> ImagesDTOs { get; set; } = new List<MediaDTO>();
-        public List<MediaDTO> VideosDTOs { get; set; } = new List<MediaDTO>();
+         public List<AreaDTO> AreaDTOs { get; set; }
+         public List<MediaDTO> MediaDTOs { get; set; } 
 
     }
 }

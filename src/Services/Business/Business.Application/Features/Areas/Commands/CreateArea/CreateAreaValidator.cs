@@ -14,9 +14,6 @@ namespace Business.Application.Features.Areas.Commands.CreateArea
         {
             RuleFor(a => a.CareerId).NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull();
-
-            RuleFor(a => a.BusinessId).NotEmpty().WithMessage("{PropertyName} is required")
-               .NotNull();
         }
     }
 }

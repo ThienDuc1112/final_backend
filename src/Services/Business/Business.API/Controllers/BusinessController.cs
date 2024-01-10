@@ -1,10 +1,13 @@
 ﻿using Business.Application.DTOs.BusinessInfor;
+using Business.Application.Features.Areas.Commands.CreateArea;
 using Business.Application.Features.BusinessInfors.Commands.CreateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Commands.UpdateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Queries.GetBusinessInfor;
 using Business.Application.Responses;
+using Business.Infrastructure.Persistance;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace Business.API.Controllers
@@ -14,10 +17,12 @@ namespace Business.API.Controllers
     public class BusinessController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly BusinessDbContext _dbContext;
 
-        public BusinessController(IMediator mediator)
+        public BusinessController(IMediator mediator, BusinessDbContext dbContext)
         {
             _mediator = mediator;
+            _dbContext = dbContext;
         }
 
         [HttpGet("BusinessInforDetail/{id}")]
@@ -51,15 +56,6 @@ namespace Business.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var command = new DeleteBusinessInforCommand { Id = id };
-            await _mediator.Send(command);
-            return NoContent();
-        }
+       
     }
 }

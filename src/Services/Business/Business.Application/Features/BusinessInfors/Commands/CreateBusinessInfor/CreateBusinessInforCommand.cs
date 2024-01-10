@@ -13,6 +13,5 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
     public class CreateBusinessInforCommand : IRequest<List<BaseCommandResponse>>
     {
         public CreateBusinessInforDTO BusinessInforDTO { get; set; }
-        public List<CreateAreaDTO> AreaDTOs { get; set; }
     }
 }

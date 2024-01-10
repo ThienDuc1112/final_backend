@@ -20,5 +20,7 @@ namespace Business.Application.DTOs.BusinessInfor
         public string Address { get; set; }
         public string UserId { get; set; }
 
+        public List<CreateAreaDTO> AreaDTOs { get; set; }
+
     }
 }

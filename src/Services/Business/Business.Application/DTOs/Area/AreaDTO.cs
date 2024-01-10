@@ -9,6 +9,6 @@ namespace Business.Application.DTOs.Area
     public class AreaDTO
     {
         public int Id { get; set; }
-        public string AreaName { get; set; }
+        public string CareerName { get; set; }
     }
 }

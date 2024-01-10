@@ -2,6 +2,7 @@
 using Business.Application.Features.Jobs.Commands.CreateJob;
 using Business.Application.Features.Jobs.Commands.DeleteJob;
 using Business.Application.Features.Jobs.Commands.UpdateJob;
+using Business.Application.Features.Jobs.Queries.GetJobDetail;
 using Business.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace Business.API.Controllers
         }
         [HttpGet("JobDetail/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<GetJobDetailDTO>> GetAllJob(int id)
+        public async Task<ActionResult<GetJobDetailDTO>> GetJob(int id)
         {
-            var query = new GetJobDetailDTO { Id = id };
+            var query = new GetJobDetailQuery{ Id = id };
             var jobDetail = await _mediator.Send(query);
 
             return Ok(jobDetail);

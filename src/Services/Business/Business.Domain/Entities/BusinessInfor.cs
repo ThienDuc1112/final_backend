@@ -31,9 +31,6 @@ namespace Business.Domain.Entities
         public string UserId { get; set; }
 
         public List<Area> Areas { get; set; }
-        [NotMapped]
-        public List<Media> Pictures { get; set; }
-        [NotMapped]
-        public List<Media> Videos { get; set; }
+        public List<Media> Medias { get; set; }
     }
 }

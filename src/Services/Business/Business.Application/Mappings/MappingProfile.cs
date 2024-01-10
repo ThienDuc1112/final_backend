@@ -19,7 +19,10 @@ namespace Business.Application.Mappings
             CreateMap<Area, AreaDTO>().ReverseMap();
             CreateMap<Area, CreateAreaDTO>().ReverseMap();
 
-            CreateMap<BusinessInfor, BusinessInforDTO>().ReverseMap();
+            CreateMap<BusinessInfor, BusinessInforDTO>()
+                .ForMember(dest => dest.AreaDTOs, act => act.MapFrom(src => src.Areas))
+               .ForMember(dest => dest.MediaDTOs, act => act.MapFrom(src => src.Medias))
+                .ReverseMap();
             CreateMap<BusinessInfor, CreateBusinessInforDTO>().ReverseMap();
             CreateMap<BusinessInfor, UpdateBusinessInforDTO>().ReverseMap();
 

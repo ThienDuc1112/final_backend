@@ -33,10 +33,12 @@ namespace Business.Application.Features.Areas.Commands.CreateArea
 
                 if (validationResults.Any(result => result.IsValid == false))
                 {
-                    var errors = validationResults.SelectMany(result => result.Errors);
+                    var errors = validationResults.SelectMany(result => result.Errors)
+                                                 .Select(error => error.ErrorMessage)
+                                                 .ToList();
                     response.Success = false;
                     response.Message = "Creation Failed";
-                    response.Errors = (List<string>)errors;
+                    response.Errors = errors;
                 }
                 else
                 {
@@ -53,13 +55,12 @@ namespace Business.Application.Features.Areas.Commands.CreateArea
                         else
                         {
                             await _unitOfWork.AreaRepository.Add(area);
-                            await _unitOfWork.Save();
                             response.Success = true;
                             response.Message = "Creation Successful";
                             response.Id = area.Id;
                         }   
                     }
-
+                    await _unitOfWork.Save();
                 }
                 return response;
             }

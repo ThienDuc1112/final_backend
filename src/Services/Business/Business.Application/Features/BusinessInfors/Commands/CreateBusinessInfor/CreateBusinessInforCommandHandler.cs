@@ -48,22 +48,25 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
 
                 //Create Area for business
                 var areaValidator = new CreateAreaValidator();
-                var validationTasks = request.AreaDTOs.Select(dto => areaValidator.ValidateAsync(dto));
+                var validationTasks = request.BusinessInforDTO.AreaDTOs.Select(dto => areaValidator.ValidateAsync(dto));
                 var validationResults = await Task.WhenAll(validationTasks);
 
                 if (validationResults.Any(result => result.IsValid == false))
                 {
                     var areaResponse = new BaseCommandResponse();
-                    var errors = validationResults.SelectMany(result => result.Errors);
+                    var errors = validationResults.SelectMany(result => result.Errors)
+                                               .Select(error => error.ErrorMessage)
+                                               .ToList();
                     areaResponse.Success = false;
                     areaResponse.Message = "Creation area Failed";
-                    areaResponse.Errors = (List<string>)errors;
+                    areaResponse.Errors = errors;
                     responseList.Add(areaResponse);
                 }
                 else
                 {
-                    
-                    var areas = _mapper.Map<List<Area>>(request.AreaDTOs);
+
+                    var areas = _mapper.Map<List<Area>>(request.BusinessInforDTO.AreaDTOs);
+                    businessInfor.Areas = new List<Area>();
                     foreach (var area in areas)
                     {
                         var areaResponse = new BaseCommandResponse();
@@ -76,16 +79,18 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
                         }
                         else
                         {
-                            area.BusinessId = businessInfor.Id;
-                            await _unitOfWork.AreaRepository.Add(area);
+                            //area.BusinessId = businessInfor.Id;
+                            //await _unitOfWork.AreaRepository.Add(area);
+                            businessInfor.Areas.Add(area);
                             areaResponse.Success = true;
                             areaResponse.Message = "Creation Successful";
                             areaResponse.Id = area.Id;
                         }
                         responseList.Add(areaResponse);
                     }
+                    await _unitOfWork.Save();
                 }
-                await _unitOfWork.Save();
+                
             }
 
             return responseList;

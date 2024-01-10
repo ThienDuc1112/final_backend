@@ -8,7 +8,7 @@ ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddInfrastructureServices(configuration);
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices(configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
