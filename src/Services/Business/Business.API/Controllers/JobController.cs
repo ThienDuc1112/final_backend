@@ -20,7 +20,7 @@ namespace Business.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("JobDetail/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetJobDetailDTO>> GetJob(int id)
         {

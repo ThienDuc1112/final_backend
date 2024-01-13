@@ -51,7 +51,7 @@ namespace Candidate.API.Controllers
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        [HttpGet(Name ="GetResume/{id}")]
+        [HttpGet("ViewResume/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResumeDTO>> GetResume(int resumeId)
         {

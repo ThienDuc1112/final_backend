@@ -76,6 +76,7 @@ namespace Business.Application.Features.BusinessInfors.Commands.UpdateBusinessIn
                         if(await _unitOfWork.AreaRepository.IsExisted(area.BusinessId, area.CareerId)==false)
                         {
                            var obj = _mapper.Map<Area>(area);
+                            obj.BusinessId = request.BusinessInforDTO.Id;
                             await _unitOfWork.AreaRepository.Add(obj);
                         }
                     }
