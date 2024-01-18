@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Provider.Application.DTOs.Career;
 using Provider.Application.Features.Careers.Commands.CreateCareer;
@@ -21,6 +22,7 @@ namespace Provider.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles =("business"))]
         [HttpGet(Name = "GetAllCareers")]
         [ProducesResponseType(typeof(IEnumerable<CareerDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<CareerDTO>>> GetAllCareers()
