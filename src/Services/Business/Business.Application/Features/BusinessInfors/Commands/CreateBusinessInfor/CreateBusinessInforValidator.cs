@@ -45,8 +45,7 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
             RuleFor(dto => dto.PhoneNumber)
                 .NotNull().WithMessage("PhoneNumber is required.")
                 .NotEmpty().WithMessage("PhoneNumber cannot be empty.")
-                .Must(IsPhoneNumberNumeric).WithMessage("{PropertyName} must be a number")
-                .MaximumLength(15).WithMessage("Email must not exceed 15 characters.");
+                .MaximumLength(15).WithMessage("Phonenumber must not exceed 15 characters.");
 
             RuleFor(dto => dto.LicenseFont)
                 .NotNull().WithMessage("LicenseFont is required.")

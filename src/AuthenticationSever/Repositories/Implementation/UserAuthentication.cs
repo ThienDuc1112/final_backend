@@ -21,6 +21,12 @@ namespace AuthenticationSever.Repositories.Implementation
         public async Task<Status> RegistrationAsync(RegisterDTO model)
         {
             var status = new Status();
+            if(model.Email == null)
+            {
+                status.StatusCode = 0;
+                status.Message = "Please provide an email address";
+                return status;
+            }
             var userExists = await userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
             {
@@ -32,6 +38,7 @@ namespace AuthenticationSever.Repositories.Implementation
             {
                 FullName = model.FullName,
                 UserName = model.Email,
+                PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
             };
             appUser.Claims.Add(new IdentityUserClaim<string>()
@@ -64,7 +71,7 @@ namespace AuthenticationSever.Repositories.Implementation
                     await userManager.AddToRoleAsync(appUser, model.Role);
                 }
                 status.StatusCode = 1;
-                status.Message = "Register successfully";
+                status.Message = appUser.Id;
             }
             return status;
         }

@@ -29,6 +29,18 @@ builder.Services.AddAuthentication("Bearer")
         options.Audience = "providerAPI";
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost3000",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
+
 var app = builder.Build();
 app.MigrateDatabase();
 
@@ -41,7 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowLocalhost3000");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

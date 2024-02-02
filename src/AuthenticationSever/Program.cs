@@ -1,6 +1,6 @@
 using AuthenticationSever.Configuration;
+using AuthenticationSever.Data;
 using AuthenticationSever.Entities;
-using AuthenticationSever.Persistance;
 using AuthenticationSever.Repositories.Abstract;
 using AuthenticationSever.Repositories.Implementation;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +33,17 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = false;
 });
 
+builder.Services.AddCors(options =>
+    {
+    options.AddPolicy("AllowLocalhost3000",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential()
     .AddInMemoryPersistedGrants()
@@ -57,8 +68,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
+app.UseCors("AllowLocalhost3000");
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AuthenticationSever.Entities;
 using System.Reflection.Emit;
 
-namespace AuthenticationSever.Persistance
+namespace AuthenticationSever.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ManageUser>
     {

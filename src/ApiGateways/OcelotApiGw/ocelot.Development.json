@@ -163,7 +163,7 @@
           "Port": "7006"
         }
       ],
-      "UpstreamPathTemplate": "/Experience/{id}",
+      "UpstreamPathTemplate": "/Education/{id}",
       "UpstreamHttpMethod": [ "DELETE" ]
     },
     {
@@ -227,18 +227,6 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/Resume/DesignYourResume",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "7006"
-        }
-      ],
-      "UpstreamPathTemplate": "/DesignYourResume",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-    {
       "DownstreamPathTemplate": "/api/v1/Resume/UpdateResume/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -249,6 +237,20 @@
       ],
       "UpstreamPathTemplate": "/UpdateResume/{id}",
       "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //provider service
+    {
+      "DownstreamPathTemplate": "/api/v1/Career",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5000"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllCareer",
+      "UpstreamHttpMethod": [ "GET" ]
+      //"CorsPolicyName": "AllowLocalhost3000"
     }
 
   ],

@@ -79,7 +79,7 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
                         }
                         else
                         {
-                            //area.BusinessId = businessInfor.Id;
+                            area.BusinessId = businessInfor.Id;
                             //await _unitOfWork.AreaRepository.Add(area);
                             businessInfor.Areas.Add(area);
                             areaResponse.Success = true;

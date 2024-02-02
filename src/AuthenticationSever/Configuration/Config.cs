@@ -58,14 +58,19 @@
             },
             new Client
             {
-                ClientId = "admin",
+                ClientId = "nextjs",
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                 ClientSecrets = { new Secret("adminSecret".Sha256()) },
-                AllowedScopes = { "providerAPI", "jobAPI", "candidateAPI", "openid", "profile", "email", "roles" },
-                RefreshTokenUsage = TokenUsage.OneTimeOnly, // Or ReUse
+                AllowedScopes = { "providerAPI", "jobAPI", "candidateAPI", "openid", "profile", "email", "roles","offline_access" },
+                AccessTokenLifetime = 3600,
+                AllowOfflineAccess = true,
+                RedirectUris = { "http://localhost:3000/Home" },
+                PostLogoutRedirectUris = { "http://localhost:3000" },
+                AllowedCorsOrigins= { "http://localhost:3000" },
+                RefreshTokenUsage = TokenUsage.ReUse, 
                 RefreshTokenExpiration = TokenExpiration.Sliding,
-                AbsoluteRefreshTokenLifetime = 360000,
-                SlidingRefreshTokenLifetime = 36000,
+                //AbsoluteRefreshTokenLifetime = 360000,
+                SlidingRefreshTokenLifetime = 360000,
 
             },
           

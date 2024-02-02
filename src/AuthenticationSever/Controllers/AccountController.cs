@@ -1,6 +1,7 @@
 ﻿using AuthenticationSever.DTOs;
 using AuthenticationSever.Entities;
 using AuthenticationSever.Repositories.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +17,26 @@ namespace AuthenticationSever.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("Register")]
-        public async Task<ActionResult<Status>> Register(RegisterDTO dto)
+        [HttpPost("candidate/register")]
+        public async Task<ActionResult<Status>> Register([FromBody] RegisterDTO dto)
         {
-            dto.Role = "business";
+            dto.Role = "candidate";
             var status = await _service.RegistrationAsync(dto);
 
 
             return status;
         }
+
+        [HttpPost("employer/register")]
+        public async Task<ActionResult<Status>> RegisterForEmployer([FromBody] RegisterDTO dto)
+        {
+            dto.Role = "employer";
+            var status = await _service.RegistrationAsync(dto);
+
+            return status;
+        }
         [HttpGet("test")]
+        //[Authorize(Roles ="admin")]
         public async Task<ActionResult> Get()
         {
             string test = "test";
