@@ -27,7 +27,7 @@ namespace Business.Application.DTOs.BusinessInfor
         public string Address { get; set; }
         public string Description { get; set; }
 
-        public List<CreateAreaDTO> AreaDTOs { get; set; }
-        public List<UploadMediaDTO> MediaDTOs { get; set; }
+        //public List<CreateAreaDTO> AreaDTOs { get; set; }
+        //public List<UploadMediaDTO> MediaDTOs { get; set; }
     }
 }

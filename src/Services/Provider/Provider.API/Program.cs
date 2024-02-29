@@ -1,3 +1,4 @@
+using IdentityServer4;
 using Microsoft.OpenApi.Models;
 using Provider.API.Extensions;
 using Provider.Application;
@@ -27,7 +28,13 @@ builder.Services.AddAuthentication("Bearer")
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
         options.Audience = "providerAPI";
+    }).AddGoogle("Google", options =>
+    {
+        options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+        options.ClientId = "25722280879-r97hgd7ff9n76u59n7rrimh39ctmrutj.apps.googleusercontent.com";
+        options.ClientSecret = "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";
     });
+;
 
 builder.Services.AddCors(options =>
 {
@@ -52,7 +59,7 @@ if (app.Environment.IsDevelopment())
     
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost3000");
 app.UseAuthentication();
 app.UseAuthorization();

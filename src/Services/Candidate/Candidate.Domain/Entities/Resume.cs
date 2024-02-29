@@ -23,6 +23,7 @@ namespace Candidate.Domain.Entities
         public string? Description { get; set; }
         public bool IsPublic { get; set; } = true;
         public string Title { get; set; }
+        public string? AdditionalSkills { get; set; }
 
         public List<LanguageOfResume> Languages { get; set; }
         public List<SkillOfResume> Skills { get; set; }

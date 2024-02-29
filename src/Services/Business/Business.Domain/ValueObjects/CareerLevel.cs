@@ -13,9 +13,9 @@ namespace Business.Domain.ValueObjects
         {
         }
 
-        public static CareerLevel Intern => new CareerLevel(1, "Intern");
-        public static CareerLevel Fresher => new CareerLevel(2, "Fresher");
-        public static CareerLevel Staff => new CareerLevel(3, "Staff");
+        public static CareerLevel Intern => new CareerLevel(1, "Fresher");
+        public static CareerLevel Fresher => new CareerLevel(2, "Junior");
+        public static CareerLevel Staff => new CareerLevel(3, "Senior");
         public static CareerLevel Manager => new CareerLevel(4, "Manager");
         public static CareerLevel Director => new CareerLevel(5, "Director");
 

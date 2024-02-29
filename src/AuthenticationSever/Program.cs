@@ -34,7 +34,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddCors(options =>
-    {
+{
     options.AddPolicy("AllowLocalhost3000",
         builder =>
         {

@@ -52,7 +52,6 @@ namespace Candidate.Application.Features.Resumes.Commands.CreateResume
 
             RuleFor(c => c.PhoneNumber)
                .NotEmpty().WithMessage("{PropertyName} is required.")
-               .Must(IsPhoneNumberNumeric).WithMessage("{PropertyName} must be a number")
                .MaximumLength(15).WithMessage("{PropertyName} must not exceed 15 characters.");
 
             RuleFor(c => c.Description)

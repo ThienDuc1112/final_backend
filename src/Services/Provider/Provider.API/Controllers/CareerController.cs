@@ -22,7 +22,6 @@ namespace Provider.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet(Name = "GetAllCareers")]
         [ProducesResponseType(typeof(IEnumerable<CareerDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<CareerDTO>>> GetAllCareers()

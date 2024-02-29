@@ -19,7 +19,7 @@
                     "User role(s)",
                     new List<string>() { "role" })
           };
-        
+
         }
 
         //public static IEnumerable<ApiResource> GetApiResources()
@@ -38,7 +38,7 @@
             new ApiScope("providerAPI", "Provider API")
             {
                 UserClaims = {  JwtClaimTypes.Role }
-              
+
             },
             new ApiScope("jobAPI", "Job API"),
             new ApiScope("candidateAPI", "Candidate API")
@@ -67,13 +67,13 @@
                 RedirectUris = { "http://localhost:3000/Home" },
                 PostLogoutRedirectUris = { "http://localhost:3000" },
                 AllowedCorsOrigins= { "http://localhost:3000" },
-                RefreshTokenUsage = TokenUsage.ReUse, 
+                RefreshTokenUsage = TokenUsage.ReUse,
                 RefreshTokenExpiration = TokenExpiration.Sliding,
                 //AbsoluteRefreshTokenLifetime = 360000,
                 SlidingRefreshTokenLifetime = 360000,
 
             },
-          
+
         };
         }
     }

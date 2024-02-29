@@ -93,6 +93,18 @@
       "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Media/UploadMedia",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/Media/UploadMedia",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Provider/GetBusinessSize",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -223,7 +235,7 @@
           "Port": "7006"
         }
       ],
-      "UpstreamPathTemplate": "/DesignYourResume",
+      "UpstreamPathTemplate": "/DesignResume",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {

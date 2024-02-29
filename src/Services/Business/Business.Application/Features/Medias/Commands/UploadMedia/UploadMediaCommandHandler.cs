@@ -27,16 +27,13 @@ namespace Business.Application.Features.Medias.Commands.UploadMedia
         {
             var response = new BaseCommandResponse();
             var validator = new UploadMediaValidator();
-            var validatorTasks = request.MediaDTO.Select(dto => validator.ValidateAsync(dto));
-            var validationResults = await Task.WhenAll(validatorTasks);
+            var validationResult = await validator.ValidateAsync(request.MediaDTO);
 
-            if (validationResults.Any(result => !result.IsValid))
+            if (validationResult.IsValid == false)
             {
-                var errors = validationResults.SelectMany(result => result.Errors);
-                response.Id = 0;
                 response.Success = false;
                 response.Message = "Creation Failed";
-                response.Errors = (List<string>)errors;
+                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
             }
             else
             {

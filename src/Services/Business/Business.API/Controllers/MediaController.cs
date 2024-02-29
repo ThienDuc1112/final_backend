@@ -1,6 +1,12 @@
-﻿using Business.Application.Features.Medias.Commands.DeleteMedia;
+﻿using Business.Application.DTOs.Job;
+using Business.Application.DTOs.Media;
+using Business.Application.Features.Jobs.Commands.CreateJob;
+using Business.Application.Features.Medias.Commands.DeleteMedia;
+using Business.Application.Features.Medias.Commands.UploadMedia;
+using Business.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Business.API.Controllers
 {
@@ -23,6 +29,15 @@ namespace Business.API.Controllers
             var command = new DeleteMediaCommand { Id = id };
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpPost("UploadMedia")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<BaseCommandResponse>>> Add([FromBody] UploadMediaDTO mediaDTO)
+        {
+            var command = new UploadMediaCommand { MediaDTO = mediaDTO };
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
     }
 }

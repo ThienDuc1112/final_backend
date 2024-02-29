@@ -41,7 +41,7 @@ namespace Business.Application.Features.BusinessInfors.Commands.CreateBusinessIn
             {
                 var businessInfor = _mapper.Map<BusinessInfor>(request.BusinessInforDTO);
                 await _unitOfWork.BusinessRepository.Add(businessInfor);
-                response.Id = businessInfor.Id;
+                response.Id = 1;
                 response.Success = true;
                 response.Message = "Creating profile successfully";
                 responseList.Add(response);

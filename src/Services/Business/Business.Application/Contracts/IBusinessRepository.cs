@@ -10,6 +10,6 @@ namespace Business.Application.Contracts
     public interface IBusinessRepository : IGenericRepository<BusinessInfor>
     {
         Task AcceptOrReject(BusinessInfor businessInfor);
-        Task<BusinessInfor> GetBusinessInforWithRelevant(int businessId);
+        Task<BusinessInfor> GetBusinessInforWithRelevant(string businessId);
     }
 }

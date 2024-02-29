@@ -25,6 +25,7 @@ namespace Provider.Application.Features.Careers.Commands.CreateCareer
         public async Task<BaseCommandResponse> Handle(CreateCareerCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
+            response.Errors = new List<string>();
             var validator = new CreateCareerValidator();
             var validationResult = await validator.ValidateAsync(request.CareerDTO);
 

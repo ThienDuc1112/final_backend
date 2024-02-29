@@ -10,6 +10,6 @@ namespace Business.Application.Features.BusinessInfors.Queries.GetBusinessInfor
 {
     public class GetBusinessInforQuery : IRequest<BusinessInforDTO>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

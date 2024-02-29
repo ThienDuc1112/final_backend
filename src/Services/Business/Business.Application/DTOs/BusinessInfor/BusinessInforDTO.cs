@@ -30,8 +30,9 @@ namespace Business.Application.DTOs.BusinessInfor
         public string longitude { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
+        public string IsApproved { get; set; }
 
-         public List<AreaDTO> AreaDTOs { get; set; }
+        public List<AreaDTO> AreaDTOs { get; set; }
          public List<MediaDTO> MediaDTOs { get; set; } 
 
     }

@@ -11,6 +11,6 @@ namespace Business.Application.Features.Medias.Commands.UploadMedia
 {
     public class UploadMediaCommand : IRequest<BaseCommandResponse>
     {
-        public List<UploadMediaDTO> MediaDTO { get; set; }
+        public UploadMediaDTO MediaDTO { get; set; }
     }
 }

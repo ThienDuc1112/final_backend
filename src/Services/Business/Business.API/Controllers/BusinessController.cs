@@ -27,7 +27,7 @@ namespace Business.API.Controllers
 
         [HttpGet("BusinessInforDetail/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<BusinessInforDTO>> GetBusinessInfor(int id)
+        public async Task<ActionResult<BusinessInforDTO>> GetBusinessInfor(string id)
         {
             var query = new GetBusinessInforQuery { Id = id };
             var businessInfor = await _mediator.Send(query);

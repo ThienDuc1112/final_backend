@@ -25,9 +25,9 @@ namespace Business.Infrastructure.Repositories
         }
 
 
-        public async Task<BusinessInfor> GetBusinessInforWithRelevant(int businessId)
+        public async Task<BusinessInfor> GetBusinessInforWithRelevant(string Id)
         {
-            var business = _dbContext.Businesses.Where(b => b.Id == businessId)
+            var business = _dbContext.Businesses.Where(b => b.UserId == Id)
                 .Select(b => new BusinessInfor
                 {
                     Id = b.Id,
