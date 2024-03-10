@@ -12,6 +12,7 @@ namespace Provider.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsAllowed { get; set; }
+        public List<Skill> Skills { get; set; }
 
     }
 }

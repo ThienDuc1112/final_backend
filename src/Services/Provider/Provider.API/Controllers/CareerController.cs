@@ -6,6 +6,7 @@ using Provider.Application.Features.Careers.Commands.CreateCareer;
 using Provider.Application.Features.Careers.Commands.DeleteCareer;
 using Provider.Application.Features.Careers.Commands.UpdateCareer;
 using Provider.Application.Features.Careers.Queries.GetCareerList;
+using Provider.Application.Features.Careers.Queries.GetCareersWithSkills;
 using Provider.Application.Responses;
 using System.Net;
 
@@ -27,6 +28,15 @@ namespace Provider.API.Controllers
         public async Task<ActionResult<IEnumerable<CareerDTO>>> GetAllCareers()
         {
             var query = new GetCareerListQuery();
+            var careers = await _mediator.Send(query);
+            return Ok(careers);
+        }
+
+        [HttpGet("GetCareersWithSkills")]
+        [ProducesResponseType(typeof(IEnumerable<GetCareerDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<GetCareerDTO>>> GetCareersWithSkills()
+        {
+            var query = new GetCareersWithSkillsQuery();
             var careers = await _mediator.Send(query);
             return Ok(careers);
         }

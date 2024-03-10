@@ -15,11 +15,8 @@ namespace Business.Application.DTOs.BusinessInfor
         public string FullName { get; set; }
         public int FoundedYear { get; set; }
         public string BusinessSize { get; set; }
-        public string TaxCode { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string LicenseFont { get; set; }
-        public string LicenseBack { get; set; }
         public string LogoUrl { get; set; }
         public string WebsiteUrl { get; set; }
         public string FaceBookUrl { get; set; }

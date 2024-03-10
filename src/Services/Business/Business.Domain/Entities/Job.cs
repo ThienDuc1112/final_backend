@@ -10,8 +10,7 @@ namespace Business.Domain.Entities
 {
     public class Job : EntityBase
     {
-        public int CareerId { get; set; }
-        [ForeignKey("BusinessId")]
+        public int CareerId { get; set; }  
         public int BusinessId { get; set; }
         public string Title { get; set; }
         public int NumberRecruitment { get; set; }
@@ -31,6 +30,7 @@ namespace Business.Domain.Entities
         public string? RequiredSkills { get; set; }
         public string Responsibilities { get; set; }
         public string Status { get; set; }
+        [ForeignKey("BusinessId")]
         public BusinessInfor Business { get; set; }
     }
 }

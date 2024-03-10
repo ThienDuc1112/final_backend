@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business.Application.DTOs.BusinessInfor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Business.Application.DTOs.Job
         public string GenderRequirement { get; set; }
         public string LanguageRequirementName { get; set; }
         public string LanguageRequirementLevel { get; set; }
+        public string CreatedDate { get; set; }
         public string? Address { get; set; }
         public string JobType { get; set; }
         public string CareerLevel { get; set; }
@@ -26,8 +28,9 @@ namespace Business.Application.DTOs.Job
         public string Description { get; set; }
         public string Welfare { get; set; }
         public string Requirement { get; set; }
-        public List<string> AllRequiredSkills { get; set; }
+        public string requiredSkills { get; set; }
         public string Responsibilities { get; set; }
         public string Status { get; set; }
+        public GetBusinessPartDTO GetBusinessPartDTO { get; set; }
     }
 }

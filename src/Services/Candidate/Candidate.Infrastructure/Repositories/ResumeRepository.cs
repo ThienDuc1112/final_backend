@@ -42,6 +42,7 @@ namespace Candidate.Infrastructure.Repositories
                     Title = r.Title,
                     Educations = r.Educations.Select(e => new Education
                     {
+                        Id = e.Id,
                         UniversityName = e.UniversityName,
                         Degree = e.Degree,
                         Major = e.Major,
@@ -50,6 +51,7 @@ namespace Candidate.Infrastructure.Repositories
                     }).ToList(),
                     Experiences = r.Experiences.Select(e => new Experience
                     {
+                        Id = e.Id,
                         Company = e.Company,
                         Title = e.Title,
                         Responsibility = e.Responsibility,
@@ -60,6 +62,13 @@ namespace Candidate.Infrastructure.Repositories
                     Languages = r.Languages
                 }).FirstOrDefaultAsync();
 
+            return resume;
+        }
+
+        public async Task<List<Resume>> FindResumeByUserId(string userId)
+        {
+            var resume = await _dbcontext.Resumes
+                .Where(s => s.UserId == userId).ToListAsync();
             return resume;
         }
 

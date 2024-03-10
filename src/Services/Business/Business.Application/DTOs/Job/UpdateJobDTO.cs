@@ -17,7 +17,7 @@ namespace Business.Application.DTOs.Job
         public string YearExpMin { get; set; }
         public string GenderRequirement { get; set; }
         public int LanguageRequirementId { get; set; }
-        public string? Address { get; set; }
+        public string Address { get; set; }
         public string JobType { get; set; }
         public string CareerLevel { get; set; }
         public decimal SalaryMin { get; set; }
@@ -25,7 +25,7 @@ namespace Business.Application.DTOs.Job
         public string Description { get; set; }
         public string Welfare { get; set; }
         public string Requirement { get; set; }
-        public string? RequiredSkills { get; set; }
+        public string RequiredSkills { get; set; }
         public string Responsibilities { get; set; }
         public string Status { get; set; }
     }

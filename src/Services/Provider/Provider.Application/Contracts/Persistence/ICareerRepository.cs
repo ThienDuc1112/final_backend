@@ -10,5 +10,6 @@ namespace Provider.Application.Contracts.Persistence
     public interface ICareerRepository : IGenericRepository<Career>
     {
         Task<bool> IsExisted(string name);
+        Task<List<Career>> GetCareersWithSkills();
     }
 }

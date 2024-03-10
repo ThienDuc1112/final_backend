@@ -13,6 +13,7 @@ using Candidate.Application.Features.LanguagesOfResume.Commands.UpdateLanguageOf
 using Candidate.Application.Features.Resumes.Commands.CreateResume;
 using Candidate.Application.Features.Resumes.Commands.UpdateResume;
 using Candidate.Application.Features.Resumes.Queries.GetResume;
+using Candidate.Application.Features.Resumes.Queries.GetResumeByUser;
 using Candidate.Application.Features.SkillsOfResume.CreateSkillOfResume;
 using Candidate.Application.Features.SkillsOfResume.UpdateSkillOfResume;
 using Candidate.Application.Responses;
@@ -60,6 +61,14 @@ namespace Candidate.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetResume/{userId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ResumeDTO>> GetResumeByUser(string userId)
+        {
+            var query = new GetResumeByUserQuery { UserId = userId };
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
         [HttpPost("DesignYourResume", Name = "DesignResume")]
         [ProducesResponseType((int)HttpStatusCode.OK)]

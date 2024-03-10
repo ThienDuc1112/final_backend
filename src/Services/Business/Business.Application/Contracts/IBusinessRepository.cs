@@ -1,4 +1,5 @@
-﻿using Business.Domain.Entities;
+﻿using Business.Application.DTOs.BusinessInfor;
+using Business.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Business.Application.Contracts
     {
         Task AcceptOrReject(BusinessInfor businessInfor);
         Task<BusinessInfor> GetBusinessInforWithRelevant(string businessId);
+        Task<BusinessInfor> GetBusinessID(string userId);
     }
 }

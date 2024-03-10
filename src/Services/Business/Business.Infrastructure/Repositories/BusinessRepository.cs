@@ -1,4 +1,5 @@
 ﻿using Business.Application.Contracts;
+using Business.Application.DTOs.BusinessInfor;
 using Business.Application.Exceptions;
 using Business.Domain.Entities;
 using Business.Infrastructure.Persistance;
@@ -24,6 +25,10 @@ namespace Business.Infrastructure.Repositories
             _dbContext.Entry(businessInfor).State = EntityState.Modified;
         }
 
+        public async Task<BusinessInfor> GetBusinessID(string userId)
+        {
+            return await _dbContext.Businesses.Where(b => b.UserId == userId).FirstOrDefaultAsync();
+        }
 
         public async Task<BusinessInfor> GetBusinessInforWithRelevant(string Id)
         {

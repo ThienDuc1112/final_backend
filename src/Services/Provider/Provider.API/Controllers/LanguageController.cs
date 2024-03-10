@@ -26,7 +26,7 @@ namespace Provider.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(Name = "GetLanguages")]
+        [HttpGet("GetLanguages")]
         [ProducesResponseType(typeof(IEnumerable<LanguageDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<LanguageDTO>>> GetLangugages()
         {

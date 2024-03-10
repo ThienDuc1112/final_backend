@@ -3,6 +3,8 @@ using Business.Application.Features.Jobs.Commands.CreateJob;
 using Business.Application.Features.Jobs.Commands.DeleteJob;
 using Business.Application.Features.Jobs.Commands.UpdateJob;
 using Business.Application.Features.Jobs.Queries.GetJobDetail;
+using Business.Application.Features.Jobs.Queries.GetJobManagement;
+using Business.Application.Features.Jobs.Queries.GetListJob;
 using Business.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,55 @@ namespace Business.API.Controllers
     public class JobController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<JobController> _logger;
 
-        public JobController(IMediator mediator)
+        public JobController(IMediator mediator, ILogger<JobController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
+
+        [HttpGet("GetListJob")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetJobDTO>>> GetListJob([FromQuery(Name = "page")] int? page, [FromQuery(Name = "Query")] string? query,
+            [FromQuery(Name = "JobType")] string? jobType, [FromQuery(Name = "MinSalary")] int? minSalary, [FromQuery(Name = "MaxSalary")] int? maxSalary,
+            [FromQuery(Name = "Career")] int? career, [FromQuery(Name = "Experience")] List<string>? experience, [FromQuery(Name = "Date")] string? date,
+            [FromQuery(Name = "Position")] List<string>? position, [FromQuery(Name = "Education")] List<string>? education)
+        {
+            _logger.LogWarning($"Received query: Query={query}, page={page}");
+
+            var getJobsQuery = new GetListJobQuery
+            {
+                Page = page,
+                Query = query,
+                JobType = jobType,
+                MinSalary = minSalary,
+                MaxSalary = maxSalary,
+                Career = career,
+                Experience = experience,
+                Date = date,
+                Position = position,
+                Education = education
+            };
+
+            var jobs = await _mediator.Send(getJobsQuery);
+            return Ok(jobs);
+        }
+
+        [HttpGet("GetJobManagement")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetJobManagementDTO>>> GetJobManagement([FromQuery(Name = "page")] int? page, [FromQuery(Name = "businessId")] int businessId)
+        {
+            var getJobsQuery = new GetJobManagementQuery
+            {
+                BusinessId = businessId,
+                Page = page
+            };
+
+            var jobs = await _mediator.Send(getJobsQuery);
+            return Ok(jobs);
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetJobDetailDTO>> GetJob(int id)
@@ -39,16 +85,15 @@ namespace Business.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}", Name = "UpdateJob")]
+        [HttpPut(Name = "UpdateJob")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update(int id, [FromBody] UpdateJobDTO jobDTO)
+        public async Task<ActionResult<BaseCommandResponse>> Update([FromBody] UpdateJobDTO jobDTO)
         {
-            jobDTO.Id = id;
             var command = new UpdateJobCommand { JobDTO = jobDTO };
-            await _mediator.Send(command);
-            return NoContent();
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpDelete("{id}")]

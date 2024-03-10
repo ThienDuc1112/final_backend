@@ -15,5 +15,6 @@ namespace Candidate.Application.Contracts.Persistence
 
         Task<string> ProvideData();
         Task<Resume> FindResumeById(int id);
+        Task<List<Resume>> FindResumeByUserId(string userId);
     }
 }

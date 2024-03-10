@@ -18,6 +18,12 @@ namespace Provider.Infrastructure.Repositories
             _dbcontext = dbContext;
         }
 
+        public async Task<List<Career>> GetCareersWithSkills()
+        {
+            var careers = await _dbcontext.Careers.Include(s => s.Skills).ToListAsync();
+            return careers;
+        }
+
         public async Task<bool> IsExisted(string name)
         {
             return await _dbcontext.Careers.AllAsync(e => e.Name == name);

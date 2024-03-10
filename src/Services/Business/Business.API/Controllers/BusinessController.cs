@@ -3,6 +3,7 @@ using Business.Application.Features.Areas.Commands.CreateArea;
 using Business.Application.Features.BusinessInfors.Commands.CreateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Commands.UpdateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Queries.GetBusinessInfor;
+using Business.Application.Features.BusinessInfors.Queries.GetIDBusiness;
 using Business.Application.Responses;
 using Business.Infrastructure.Persistance;
 using MediatR;
@@ -35,6 +36,15 @@ namespace Business.API.Controllers
             return Ok(businessInfor);
         }
 
+        [HttpGet("BusinessId/{userId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetBusinessIdDTO>> GetBusinessID(string userId)
+        {
+            var query = new GetIDBusinessQuery { userId = userId };
+            var businessID = await _mediator.Send(query);
+            return Ok(businessID);
+        }
+
         [HttpPost(Name = "AddBusinessInfor")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<BaseCommandResponse>> Add([FromBody] CreateBusinessInforDTO businessInforDTO)
@@ -44,13 +54,12 @@ namespace Business.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}", Name = "UpdateBusinessInfor")]
+        [HttpPut(Name = "UpdateBusinessInfor")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update(int id, [FromBody] UpdateBusinessInforDTO businessInforDTO)
+        public async Task<ActionResult> Update([FromBody] UpdateBusinessInforDTO businessInforDTO)
         {
-            businessInforDTO.Id = id;
             var command = new UpdateBusinessInforCommand { BusinessInforDTO = businessInforDTO };
             await _mediator.Send(command);
             return NoContent();

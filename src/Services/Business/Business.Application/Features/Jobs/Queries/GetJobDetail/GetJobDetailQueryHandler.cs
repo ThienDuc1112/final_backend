@@ -33,7 +33,7 @@ namespace Business.Application.Features.Jobs.Queries.GetJobDetail
 
         public async Task<GetJobDetailDTO> Handle(GetJobDetailQuery request, CancellationToken cancellationToken)
         {
-            var job = await _jobRepository.GetById(request.Id);
+            var job = await _jobRepository.GetJobById(request.Id);
             if (job == null)
             {
                 throw new NotFoundException(nameof(Job), request.Id);
@@ -45,20 +45,24 @@ namespace Business.Application.Features.Jobs.Queries.GetJobDetail
             jobDTO.CareerName = carrer.Name;
             jobDTO.LanguageRequirementName = language.LanguageName;
             jobDTO.LanguageRequirementLevel = language.Level;
-            jobDTO.AllRequiredSkills = new List<string>();
-            string[] requiredSkills = job.RequiredSkills.Split(";", StringSplitOptions.RemoveEmptyEntries);
-            foreach (string skillIdString in requiredSkills)
-            {
-                if (int.TryParse(skillIdString, out int idSkill))
-                {
-                    var skill = await _skillGrpcService.GetSkill(idSkill);
-                    jobDTO.AllRequiredSkills.Add(skill.NameSkill);
-                }
-                else
-                {
-                    throw new ArgumentException("An error during adding skill name arised");
-                }
-            }
+            //jobDTO.AllRequiredSkills = new List<string>();
+            //string[] requiredSkills = job.RequiredSkills.Split(";", StringSplitOptions.RemoveEmptyEntries);
+            //foreach (string skillIdString in requiredSkills)
+            //{
+            //    if (int.TryParse(skillIdString, out int idSkill))
+            //    {
+            //        var skill = await _skillGrpcService.GetSkill(idSkill);
+            //        jobDTO.AllRequiredSkills.Add(skill.NameSkill);
+            //    }
+            //    else
+            //    {
+            //        throw new ArgumentException("An error during adding skill name arised");
+            //    }
+            //}
+            //foreach(var skill in requiredSkills)
+            //{
+            //    jobDTO.AllRequiredSkills.Add(skill);
+            //}
 
             return jobDTO;
         }

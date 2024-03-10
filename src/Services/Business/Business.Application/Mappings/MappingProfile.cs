@@ -25,6 +25,8 @@ namespace Business.Application.Mappings
                 .ReverseMap();
             CreateMap<BusinessInfor, CreateBusinessInforDTO>().ReverseMap();
             CreateMap<BusinessInfor, UpdateBusinessInforDTO>().ReverseMap();
+            CreateMap<BusinessInfor, GetBusinessIdDTO>().ReverseMap();
+            CreateMap<BusinessInfor, GetBusinessPartDTO>().ReverseMap();
 
             CreateMap<Media, MediaDTO>().ReverseMap();
             CreateMap<Media, UploadMediaDTO>().ReverseMap();
@@ -32,7 +34,9 @@ namespace Business.Application.Mappings
             CreateMap<Job, JobDTO>().ReverseMap();
             CreateMap<Job, CreateJobDTO>().ReverseMap();
             CreateMap<Job, UpdateJobDTO>().ReverseMap();
-            CreateMap<Job, GetJobDetailDTO>().ReverseMap();
+            CreateMap<Job, GetJobDetailDTO>()
+                .ForMember(dest => dest.GetBusinessPartDTO, act => act.MapFrom(src => src.Business))
+                .ReverseMap();
         }
     }
 }

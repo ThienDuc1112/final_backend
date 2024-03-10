@@ -38,6 +38,18 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Business/BusinessID/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/BusinessID/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Business",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -50,7 +62,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/Business/{id}",
+      "DownstreamPathTemplate": "/api/v1/Business",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -58,7 +70,7 @@
           "Port": "5002"
         }
       ],
-      "UpstreamPathTemplate": "/Business/{id}",
+      "UpstreamPathTemplate": "/Business",
       "UpstreamHttpMethod": [ "PUT" ]
     },
     {
@@ -90,7 +102,43 @@
         }
       ],
       "UpstreamPathTemplate": "/Job/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/Job",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetListJob",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetListJob",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetJobManagement",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetJobManagement",
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/Media/UploadMedia",
@@ -141,7 +189,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/Provider/GetExperienceLevel",
+      "DownstreamPathTemplate": "/api/v1/Provider/GetExperienceYear",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -149,7 +197,7 @@
           "Port": "5002"
         }
       ],
-      "UpstreamPathTemplate": "/Provider/GetExperienceLevel",
+      "UpstreamPathTemplate": "/Provider/GetExperienceYear",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -227,6 +275,18 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Resume/GetResume/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7006"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetResume/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Resume/DesignYourResume",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -263,8 +323,31 @@
       "UpstreamPathTemplate": "/GetAllCareer",
       "UpstreamHttpMethod": [ "GET" ]
       //"CorsPolicyName": "AllowLocalhost3000"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Language/GetLanguages",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5000"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetLanguages",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Career/GetCareersWithSkills",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5000"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetCareersWithSkills",
+      "UpstreamHttpMethod": [ "GET" ]
     }
-
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5011"
