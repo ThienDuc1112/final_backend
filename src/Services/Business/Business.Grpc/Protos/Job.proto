@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Business.Grpc.Protos";
+
+service JobProtoService {
+	rpc GetJob (GetJobRequest) returns (JobModel);
+}
+
+
+message GetJobRequest {
+	int32 jobId = 1;
+}
+
+message JobModel {
+	int32 id = 1;
+	string title = 2;
+	int32 numberRecruitment = 3;
+}

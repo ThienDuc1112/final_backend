@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Candidate.Grpc.Protos";
+
+service ResumeProtoService {
+	rpc GetResume (GetResumeRequest) returns (ResumeModel);
+}
+
+message GetResumeRequest {
+	int32 resumeId = 1;
+}
+
+message ResumeModel {
+	int32 id = 1;
+	string fullName = 2;
+	string title = 3;
+	string email = 4;
+	string avatarUrl = 5;
+}

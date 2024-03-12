@@ -4,9 +4,6 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Provider.Grpc.Protos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 
@@ -26,6 +23,7 @@ namespace Business.Application
                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
             services.AddGrpcClient<SkillProtoService.SkillProtoServiceClient>
                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcUrl"]));
+
 
             services.AddScoped<CareerGrpcService>();
             services.AddScoped<LanguageGrpcService>();

@@ -9,7 +9,7 @@ namespace Application.Domain.Entities
 {
     public class AppliedJob : EntityBase
     {
-        public int CandidateId { get; set; }
+        public string CandidateId { get; set; }
         public int JobId { get; set; }
         public int ResumeId { get; set; }
         public string Status { get; set; }

@@ -1,11 +1,16 @@
+using Application.API.GrpcServices;
 using Application.Infrastructure;
+using Business.Grpc.Protos;
+using Candidate.Grpc.Protos;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddInfrastructureServices(configuration);
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -13,6 +18,14 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "applicationAPI", Version = "v1" });
 });
+
+builder.Services.AddGrpcClient<JobProtoService.JobProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcJobUrl"]));
+builder.Services.AddGrpcClient<ResumeProtoService.ResumeProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcResumeUrl"]));
+
+builder.Services.AddScoped<JobGrpcService>();
+builder.Services.AddScoped<ResumeGrpcService>();
 
 builder.Services.AddCors(options =>
 {

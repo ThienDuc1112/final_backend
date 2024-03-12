@@ -8,7 +8,6 @@ using Provider.Infrastructure.Persistance;
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration;
-
 // Add services to the container.
 
 builder.Services.AddInfrastructureServices(configuration);
@@ -24,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:5007";
+        options.Authority = configuration["Identity:Authority"]; ;
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
         options.Audience = "providerAPI";
