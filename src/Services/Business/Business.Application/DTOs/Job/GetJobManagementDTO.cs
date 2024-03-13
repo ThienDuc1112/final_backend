@@ -12,5 +12,7 @@ namespace Business.Application.DTOs.Job
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; }
+        public int NumberRecruitment { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 }

@@ -37,6 +37,9 @@ namespace Business.Application.Mappings
             CreateMap<Job, GetJobDetailDTO>()
                 .ForMember(dest => dest.GetBusinessPartDTO, act => act.MapFrom(src => src.Business))
                 .ReverseMap();
+            CreateMap<Job, GetJobAppDTO>()
+                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Title))
+                .ReverseMap();
         }
     }
 }

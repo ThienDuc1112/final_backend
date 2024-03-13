@@ -12,7 +12,7 @@ namespace Application.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AppliedJobController : ControllerBase
+    public class AppliedJobController : Controller
     {
         private readonly IAppliedJobRepository _appliedJobRepository;
         private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace Application.API.Controllers
             _jobGrpcService = jobGrpcService;
         }
 
-        [HttpGet("GetApplication/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<GetAppDetailDTO>> GetDetail(int id)
@@ -39,7 +39,7 @@ namespace Application.API.Controllers
             }
             var appDTO = _mapper.Map<GetAppDetailDTO>(app);
 
-            var resume = await _resumeGrpcService.GetResume(app.JobId);
+            var resume = await _resumeGrpcService.GetResume(app.ResumeId);
             appDTO.FullName = resume.FullName;
             appDTO.AvatarUrl = resume.AvatarUrl;
             appDTO.Title = resume.Title;
@@ -52,12 +52,12 @@ namespace Application.API.Controllers
             return appDTO;
         }
 
-        [HttpGet("{jobId}")]
+        [HttpGet("GetApplications")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<List<GetAppliedJobDTO>>> Get(int jobId)
+        public async Task<ActionResult<List<GetAppliedJobDTO>>> Get([FromQuery(Name = "jobId")] int jobId, [FromQuery(Name = "status")] string? status)
         {
-            var applications = await _appliedJobRepository.GetAppliedJob(jobId);
+            var applications = await _appliedJobRepository.GetAppliedJob(jobId, status);
             if (applications == null)
             {
                 return NotFound();
@@ -114,6 +114,43 @@ namespace Application.API.Controllers
                 }
                 return Ok(response);
             }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<BaseCommandResponse>> Update([FromBody] UpdateAppliedJobDTO appliedJobDTO)
+        {
+            var response = new BaseCommandResponse();
+            if (!ModelState.IsValid)
+            {
+                response.Id = 0;
+                response.Success = false;
+                response.Message = "Created failed";
+                response.Errors = ModelState.Values
+                    .SelectMany(e => e.Errors.Select(er => er.ErrorMessage)).ToList();
+                return BadRequest(response);
+            }
+            else
+            {
+                var app = await _appliedJobRepository.GetById(appliedJobDTO.Id);
+                if(app == null)
+                {
+                    response.Id = 0;
+                    response.Success = false;
+                    response.Message = "Can not find this application";
+                }
+                else
+                {
+                    _mapper.Map(appliedJobDTO, app);
+                    await _appliedJobRepository.Update(app);
+                    response.Id = 1;
+                    response.Success = true;
+                    response.Message = "Updating job application succcesfully";
+                }
+            }
+            return Ok(response);
         }
     }
 }

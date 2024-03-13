@@ -5,6 +5,7 @@ using Business.Application.Features.Jobs.Commands.UpdateJob;
 using Business.Application.Features.Jobs.Queries.GetJobDetail;
 using Business.Application.Features.Jobs.Queries.GetJobManagement;
 using Business.Application.Features.Jobs.Queries.GetListJob;
+using Business.Application.Features.Jobs.Queries.GetListJobApp;
 using Business.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,18 @@ namespace Business.API.Controllers
             {
                 BusinessId = businessId,
                 Page = page
+            };
+
+            var jobs = await _mediator.Send(getJobsQuery);
+            return Ok(jobs);
+        }
+        [HttpGet("GetJobApp")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetJobAppDTO>>> GetJobApp([FromQuery(Name = "businessId")] int businessId)
+        {
+            var getJobsQuery = new GetListJobAppQuery
+            {
+                BusinessId = businessId,
             };
 
             var jobs = await _mediator.Send(getJobsQuery);

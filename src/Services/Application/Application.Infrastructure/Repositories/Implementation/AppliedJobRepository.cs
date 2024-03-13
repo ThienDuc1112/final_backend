@@ -19,9 +19,14 @@ namespace Application.Infrastructure.Repositories.Implementation
             _dbContext = DbContext;
         }
 
-        public async Task<List<AppliedJob>> GetAppliedJob(int jobId)
+        public async Task<List<AppliedJob>> GetAppliedJob(int jobId, string status)
         {
-            var applications = await _dbContext.AppliedJobs.Where(a => a.JobId == jobId).ToListAsync();
+            IQueryable<AppliedJob> apps = _dbContext.AppliedJobs;
+            if(status != "All")
+            {
+                apps = apps.Where(x => x.Status == status);
+            }
+            var applications = await apps.Where(a => a.JobId == jobId).ToListAsync();
             return applications;
         }
 

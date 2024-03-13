@@ -12,8 +12,10 @@ namespace Application.Infrastructure.Repositories.Abstraction
     {
         Task<bool> IsExisted(int jobId, string candidateId);
 
-        Task<List<AppliedJob>> GetAppliedJob(int jobId);
+        Task<List<AppliedJob>> GetAppliedJob(int jobId, string status);
 
         Task<QueryAppliedJobDTO> GetAppliedJobDetailDTO(int id);
+
+
     }
 }

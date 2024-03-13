@@ -26,7 +26,6 @@ namespace Candidate.Grpc.Services
                 throw new RpcException(new Status(StatusCode.NotFound, $"Resume with id = {request.ResumeId} is not found."));
             }
             var resumeModel = _mapper.Map<ResumeModel>(resume);
-            logger.LogInformation($"Resume is retrieved: {resume.FullName} - {resume.Id}");
             return resumeModel;
         }
     }

@@ -23,6 +23,15 @@ namespace Business.Infrastructure.Repositories
             return await _dbContext.Jobs.ToListAsync();
         }
 
+        public async Task<List<Job>> GetJobApp(int businessId)
+        {
+            var jobs = await _dbContext.Jobs
+                .Where(j => j.BusinessId == businessId)
+                .ToListAsync();
+
+            return jobs;
+        }
+
         public async Task<Job> GetJobById(int id)
         {
             return await _dbContext.Jobs.Include(j => j.Business).FirstOrDefaultAsync();
@@ -34,6 +43,8 @@ namespace Business.Infrastructure.Repositories
             int pageSize = 8;
             int itemsToSkip = (int)(page - 1) * pageSize;
             IQueryable<Job> jobQuery = _dbContext.Jobs;
+
+            jobQuery = jobQuery.Where(j => j.BusinessId == businessId);
 
             var jobs = await jobQuery.Select(j => new GetJobManagementDTO
             {

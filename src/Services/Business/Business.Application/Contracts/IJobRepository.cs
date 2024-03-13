@@ -19,5 +19,6 @@ namespace Business.Application.Contracts
         Task<Job> GetJobById(int id);
 
         Task<List<GetJobManagementDTO>> GetJobManagements(int? page, int businessId);
+        Task<List<Job>> GetJobApp(int businessId);
     }
 }

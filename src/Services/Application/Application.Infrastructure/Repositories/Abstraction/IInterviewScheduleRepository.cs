@@ -1,4 +1,5 @@
-﻿using Application.Domain.Entities;
+﻿using Application.Domain.DTOs.InterviewSchedule;
+using Application.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace Application.Infrastructure.Repositories.Abstraction
 {
     public interface IInterviewScheduleRepository : IGenericRepository<InterviewSchedule>
     {
+
+        Task<List<InterviewSchedule>> GetInterviewsByApp(int appId);
     }
 }
