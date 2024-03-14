@@ -13,6 +13,7 @@ namespace Application.API.Mappings
             CreateMap<AppliedJob, GetAppliedJobDTO>().ReverseMap();
             CreateMap<QueryAppliedJobDTO, GetAppDetailDTO>().ReverseMap();
             CreateMap<AppliedJob, UpdateAppliedJobDTO>().ReverseMap();
+            CreateMap<AppliedJob, UpdateMeetingUrlApp>().ReverseMap();
 
             CreateMap<InterviewSchedule, CreateInterviewDTO>().ReverseMap();
             CreateMap<InterviewSchedule, GetInterviewDTO>().ReverseMap();

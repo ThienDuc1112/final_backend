@@ -374,6 +374,18 @@
       "UpstreamPathTemplate": "/GetApplicationDetail/{id}"
     },
     {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetAppsUser/{candidateId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetAppsUser/{candidateId}"
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/AppliedJob/GetApplications",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -396,6 +408,18 @@
       ],
       "UpstreamPathTemplate": "/AppliedJob",
       "UpstreamHttpMethod": [ "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/UpdatingMeeting",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdatingMeeting",
+      "UpstreamHttpMethod": [ "PUT" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/Interview",

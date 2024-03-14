@@ -20,7 +20,7 @@ namespace Business.Grpc.Services
 
         public override async Task<JobModel> GetJob(GetJobRequest request, ServerCallContext context)
         {
-            var job = await jobRepository.GetById(request.JobId);
+            var job = await jobRepository.GetJobWithBusiness(request.JobId);
             if(job == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"Job with id = {request.JobId} is not found."));

@@ -19,6 +19,21 @@ namespace Application.Infrastructure.Repositories.Implementation
             _dbContext = DbContext;
         }
 
+        public async Task<List<GetApplicationList>> GetApplicationList(string candidateId)
+        {
+            var jobs = await _dbContext.AppliedJobs.Where(j => j.CandidateId == candidateId)
+                .Select(j => new GetApplicationList
+                {
+                    Id = j.Id,
+                    CreatedDate = j.CreatedDate,
+                    Status = j.Status,
+                    JobId = j.JobId,
+                }).OrderByDescending(j => j.CreatedDate)
+                .ToListAsync();
+
+            return jobs;
+        }
+
         public async Task<List<AppliedJob>> GetAppliedJob(int jobId, string status)
         {
             IQueryable<AppliedJob> apps = _dbContext.AppliedJobs;

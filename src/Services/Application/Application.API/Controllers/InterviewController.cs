@@ -27,13 +27,13 @@ namespace Application.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<List<GetInterviewDTO>>> Get(int applicationId)
         {
-            var interviews = await _interviewScheduleRepository.GetAll();
+            var interviews = await _interviewScheduleRepository.GetInterviewsByApp(applicationId);
             if (interviews == null)
             {
                 return NotFound();
             }
             var interviewDTOs = _mapper.Map<List<GetInterviewDTO>>(interviews);
-            return View(interviewDTOs);
+            return Ok(interviewDTOs);
         }
 
         [HttpPost]

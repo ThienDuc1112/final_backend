@@ -12,6 +12,7 @@ namespace Application.Domain.DTOs.AppliedJob
         public int ResumeId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; }
+        public string Url { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Title { get; set; }
@@ -20,6 +21,9 @@ namespace Application.Domain.DTOs.AppliedJob
         public int NumberRecruitment { get; set; }
         public int AppliedNumber { get; set; }
         public int AcceptedNumber { get; set; }
+        public string BusinessName { get; set; }
+        public int JobId { get; set; }
+        public string LogoUrl { get; set; }
 
     }
 }

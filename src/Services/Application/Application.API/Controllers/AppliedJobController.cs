@@ -38,6 +38,7 @@ namespace Application.API.Controllers
                 return NotFound();
             }
             var appDTO = _mapper.Map<GetAppDetailDTO>(app);
+            appDTO.JobId = app.JobId;
 
             var resume = await _resumeGrpcService.GetResume(app.ResumeId);
             appDTO.FullName = resume.FullName;
@@ -48,8 +49,34 @@ namespace Application.API.Controllers
             var job = await _jobGrpcService.GetJob(app.JobId);
             appDTO.JobTitle = job.Title;
             appDTO.NumberRecruitment = job.NumberRecruitment;
+            appDTO.BusinessName = job.BusinessName;
+            appDTO.LogoUrl = job.AvatarUrl;
 
             return appDTO;
+        }
+
+        [HttpGet("GetAppsUser/{candidateId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult<List<GetApplicationList>>> GetApplicationList(string candidateId)
+        {
+            var apps = await _appliedJobRepository.GetApplicationList(candidateId);
+            if (apps == null)
+            {
+                return NotFound();
+            }
+
+            var jobTasks = apps.Select(job => _jobGrpcService.GetJob(job.JobId)).ToList();
+            var jobs = await Task.WhenAll(jobTasks);
+            for(int i = 0; i < jobs.Length; i++)
+            {
+                var job = jobs[i];
+                apps[i].BusinessName = job.BusinessName;
+                apps[i].LogoUrl = job.AvatarUrl;
+                apps[i].Title = job.Title;
+            }
+
+            return Ok(apps);
         }
 
         [HttpGet("GetApplications")]
@@ -148,6 +175,43 @@ namespace Application.API.Controllers
                     response.Id = 1;
                     response.Success = true;
                     response.Message = "Updating job application succcesfully";
+                }
+            }
+            return Ok(response);
+        }
+
+        [HttpPut("UpdatingMeeting")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<BaseCommandResponse>> UpdateMeeting([FromBody] UpdateMeetingUrlApp appliedJobDTO)
+        {
+            var response = new BaseCommandResponse();
+            if (!ModelState.IsValid)
+            {
+                response.Id = 0;
+                response.Success = false;
+                response.Message = "Created failed";
+                response.Errors = ModelState.Values
+                    .SelectMany(e => e.Errors.Select(er => er.ErrorMessage)).ToList();
+                return BadRequest(response);
+            }
+            else
+            {
+                var app = await _appliedJobRepository.GetById(appliedJobDTO.Id);
+                if (app == null)
+                {
+                    response.Id = 0;
+                    response.Success = false;
+                    response.Message = "Can not find this application";
+                }
+                else
+                {
+                    _mapper.Map(appliedJobDTO, app);
+                    await _appliedJobRepository.Update(app);
+                    response.Id = 1;
+                    response.Success = true;
+                    response.Message = "Adding meeting url succcesfully";
                 }
             }
             return Ok(response);

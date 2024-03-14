@@ -153,5 +153,21 @@ namespace Business.Infrastructure.Repositories
 
             return jobs;
         }
+
+        public async Task<GetJobWithBusinessDTO> GetJobWithBusiness(int id)
+        {
+            var job = await _dbContext.Jobs.Where(x => x.Id == id)
+                .Select(x => new GetJobWithBusinessDTO
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    BusinessId = x.BusinessId,
+                    BusinessName = x.Business.FullName,
+                    NumberRecruitment = x.NumberRecruitment,
+                    AvatarUrl = x.Business.LogoUrl
+                }).FirstOrDefaultAsync();
+
+            return job;
+        }
     }
 }

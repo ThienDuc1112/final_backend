@@ -15,4 +15,7 @@ message JobModel {
 	int32 id = 1;
 	string title = 2;
 	int32 numberRecruitment = 3;
+	int32 businessId = 4;
+	string businessName = 5;
+	string avatarUrl = 6;
 }
