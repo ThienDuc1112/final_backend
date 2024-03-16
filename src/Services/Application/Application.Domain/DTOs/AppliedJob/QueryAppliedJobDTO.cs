@@ -10,6 +10,7 @@ namespace Application.Domain.DTOs.AppliedJob
     {
         public int Id { get; set; }
         public int ResumeId { get; set; }
+        public string Url { get; set; }
         public int JobId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; }

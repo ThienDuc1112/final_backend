@@ -444,6 +444,18 @@
       ],
       "UpstreamPathTemplate": "/Interview/{applicationId}",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Zoom/{date}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamPathTemplate": "/Zoom/{date}",
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
   ],

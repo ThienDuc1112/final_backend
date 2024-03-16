@@ -19,13 +19,14 @@ namespace Application.API.Controllers
         private const string clientSecret = "CjunSQB2GWcxxVj8Xc7JSLGtTekBNEhp";
         private const string accountId = "sPd9Cpm6RcOsCjiXDNX1lw";
 
-        [HttpGet]
-        public async Task<ActionResult<string>> CreateMeeting()
+        [HttpGet("{date}")]
+        public async Task<ActionResult<string>> CreateMeeting(DateTime date)
         {
             string jwtToken = await GetAccessToken();
 
             string meetingTopic = "JobBox platform Meeting";
-            string meetingStartTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            //string meetingStartTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            string meetingStartTime = date.ToString("yyyy-MM-ddTHH:mm:ssZ");
             int meetingDuration = 60;
 
 

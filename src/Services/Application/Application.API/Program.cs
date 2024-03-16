@@ -4,6 +4,7 @@ using Business.Grpc.Protos;
 using Candidate.Grpc.Protos;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -38,6 +39,13 @@ builder.Services.AddCors(options =>
                 .AllowCredentials();
         });
 });
+
+builder.Services.AddMassTransit(config => {
+    config.UsingRabbitMq((ctx, cfg) => {
+        cfg.Host(configuration["EventBusSettings:HostAddress"]);
+    });
+});
+
 
 var app = builder.Build();
 

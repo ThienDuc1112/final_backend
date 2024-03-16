@@ -10,6 +10,7 @@ using Business.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace Business.API.Controllers
 {
@@ -28,12 +29,13 @@ namespace Business.API.Controllers
 
         [HttpGet("GetListJob")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<List<GetJobDTO>>> GetListJob([FromQuery(Name = "page")] int? page, [FromQuery(Name = "Query")] string? query,
-            [FromQuery(Name = "JobType")] string? jobType, [FromQuery(Name = "MinSalary")] int? minSalary, [FromQuery(Name = "MaxSalary")] int? maxSalary,
-            [FromQuery(Name = "Career")] int? career, [FromQuery(Name = "Experience")] List<string>? experience, [FromQuery(Name = "Date")] string? date,
-            [FromQuery(Name = "Position")] List<string>? position, [FromQuery(Name = "Education")] List<string>? education)
+        public async Task<ActionResult<List<GetJobDTO>>> GetListJob([FromQuery(Name = "page")] int? page, [FromQuery(Name = "query")] string? query,
+            [FromQuery(Name = "jobType")] string? jobType, [FromQuery(Name = "minSalary")] int? minSalary, [FromQuery(Name = "maxSalary")] int? maxSalary,
+            [FromQuery(Name = "career")] int career, [FromQuery(Name = "experience")] string experience, [FromQuery(Name = "date")] string? date,
+            [FromQuery(Name = "position")] string position, [FromQuery(Name = "education")] string education)
         {
             _logger.LogWarning($"Received query: Query={query}, page={page}");
+            _logger.LogCritical($"Get data: {experience}, {position}");
 
             var getJobsQuery = new GetListJobQuery
             {
@@ -43,10 +45,10 @@ namespace Business.API.Controllers
                 MinSalary = minSalary,
                 MaxSalary = maxSalary,
                 Career = career,
-                Experience = experience,
+                Experience = JsonConvert.DeserializeObject<List<string>>(experience),
                 Date = date,
-                Position = position,
-                Education = education
+                Position = JsonConvert.DeserializeObject<List<string>>(position),
+                Education = JsonConvert.DeserializeObject<List<string>>(education),
             };
 
             var jobs = await _mediator.Send(getJobsQuery);

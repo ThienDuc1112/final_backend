@@ -16,9 +16,9 @@ namespace Business.Application.Features.Jobs.Queries.GetListJob
         public decimal? MinSalary { get; set; }
         public decimal? MaxSalary { get; set; }
         public int? Career { get; set; }
-        public List<string>? Experience { get; set; }
+        public List<string> Experience { get; set; } = new List<string>();
         public string? Date { get; set; }
-        public List<string>? Position { get; set; }
-        public List<string>? Education { get; set; }
+        public List<string> Position { get; set; } = new List<string>();
+        public List<string> Education { get; set; } = new List<string>();
     }
 }

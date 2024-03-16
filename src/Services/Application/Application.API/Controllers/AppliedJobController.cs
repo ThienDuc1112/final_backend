@@ -4,6 +4,8 @@ using Application.Domain.DTOs.AppliedJob;
 using Application.Domain.Entities;
 using Application.Infrastructure.Repositories.Abstraction;
 using AutoMapper;
+using EventBus.Messages.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -18,13 +20,16 @@ namespace Application.API.Controllers
         private readonly IMapper _mapper;
         private readonly ResumeGrpcService _resumeGrpcService;
         private readonly JobGrpcService _jobGrpcService;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-      public AppliedJobController(IAppliedJobRepository appliedJobRepository, IMapper mapper, ResumeGrpcService resumeGrpcService, JobGrpcService jobGrpcService)
+      public AppliedJobController(IAppliedJobRepository appliedJobRepository, IMapper mapper, ResumeGrpcService resumeGrpcService,
+          JobGrpcService jobGrpcService, IPublishEndpoint publishEndpoint)
         {
             _appliedJobRepository = appliedJobRepository;
             _mapper = mapper;
             _resumeGrpcService = resumeGrpcService;
             _jobGrpcService = jobGrpcService;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet("{id}")]
@@ -138,6 +143,18 @@ namespace Application.API.Controllers
                     var appliedJob = _mapper.Map<AppliedJob>(appliedJobDTO);
                     appliedJob.Status = "Pending";
                     await _appliedJobRepository.Add(appliedJob);
+                    /////////
+                    var job = await _jobGrpcService.GetJob(appliedJob.JobId);
+                    var resume = await _resumeGrpcService.GetResume(appliedJob.ResumeId);
+                    var message = new SendingMessageEvent
+                    {
+                        BusinessName = job.BusinessName,
+                        Title = job.Title,
+                        FullName = resume.FullName,
+                        Type = "Applying",
+                        UserId = appliedJob.CandidateId,
+                    };
+                    await _publishEndpoint.Publish(message);
                 }
                 return Ok(response);
             }

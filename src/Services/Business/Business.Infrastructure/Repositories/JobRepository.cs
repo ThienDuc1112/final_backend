@@ -34,7 +34,10 @@ namespace Business.Infrastructure.Repositories
 
         public async Task<Job> GetJobById(int id)
         {
-            return await _dbContext.Jobs.Include(j => j.Business).FirstOrDefaultAsync();
+            return await _dbContext.Jobs
+                .AsNoTracking()
+                .Include(j => j.Business)
+                .FirstOrDefaultAsync(j => j.Id == id);
         }
 
         public async Task<List<GetJobManagementDTO>> GetJobManagements(int? page, int businessId)
@@ -71,7 +74,7 @@ namespace Business.Infrastructure.Repositories
                 jobQuery = jobQuery.Where(x => x.Title.Contains(query));
             }
 
-            if (!string.IsNullOrEmpty(jobType))
+            if (jobType != "Job Type")
             {
                 jobQuery = jobQuery.Where(x => x.JobType == jobType);
             }
@@ -86,7 +89,7 @@ namespace Business.Infrastructure.Repositories
                 jobQuery = jobQuery.Where(x => x.SalaryMax <= maxSalary.Value);
             }
 
-            if (career.HasValue)
+            if (career != 0)
             {
                 jobQuery = jobQuery.Where(x => x.CareerId == career.Value);
             }

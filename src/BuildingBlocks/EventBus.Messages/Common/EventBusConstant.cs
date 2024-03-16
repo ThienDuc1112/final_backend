@@ -8,6 +8,6 @@ namespace EventBus.Messages.Common
 {
     public static class EventBusConstant
     {
-        public const string SendingJobQueue = "sendingjob-queue";
+        public const string SendingMessageQueue = "sendingmessage-queue";
     }
 }

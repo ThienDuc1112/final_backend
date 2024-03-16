@@ -54,6 +54,7 @@ namespace Application.Infrastructure.Repositories.Implementation
                     JobId = a.JobId,
                     ResumeId = a.ResumeId,
                     Status = a.Status,
+                    Url = a.Url,
                     CreatedDate = a.CreatedDate,
                     AppliedNumber = _dbContext.AppliedJobs.Count(j => j.JobId == a.JobId),
                     AcceptedNumber = _dbContext.AppliedJobs.Count(j => j.JobId == a.JobId && j.Status == "Accepted")
