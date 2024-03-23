@@ -8,6 +8,7 @@ namespace Notification.API.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        public int ApplicationId { get; set; }
         public string UserId { get; set; }
         public string BusinessName { get; set; }
         public string FullName { get; set; }

@@ -25,6 +25,7 @@ namespace Candidate.Application.DTOs.Resume
         public string Description { get; set; }
         public string Title { get; set; }
         public string NameCareer { get; set; }
+        public string AdditionalSkills { get; set; }
 
         public List<EducationDTO> EducationsDTO { get; set; }
         public List<ExperienceDTO> ExperiencesDTO { get; set; }

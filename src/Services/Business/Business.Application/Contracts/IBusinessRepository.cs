@@ -12,6 +12,7 @@ namespace Business.Application.Contracts
     {
         Task AcceptOrReject(BusinessInfor businessInfor);
         Task<BusinessInfor> GetBusinessInforWithRelevant(string businessId);
+        Task<BusinessInfor> GetBusinessDetail(int id);
         Task<BusinessInfor> GetBusinessID(string userId);
     }
 }

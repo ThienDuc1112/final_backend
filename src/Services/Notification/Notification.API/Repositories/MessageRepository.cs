@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Notification.API.Data;
+using Notification.API.DTOs;
 using Notification.API.Entities;
 
 namespace Notification.API.Repositories
@@ -10,7 +11,7 @@ namespace Notification.API.Repositories
         public MessageRepository(INotificationContext notificationContext)
         {
             _notificationContext = notificationContext;
-        }   
+        }
 
         public async Task CreateMessage(Message message)
         {
@@ -27,12 +28,53 @@ namespace Notification.API.Repositories
 
         public async Task<IEnumerable<Message>> GetAll()
         {
-            return await _notificationContext.Messages.Find(m => true).ToListAsync();
+            return await _notificationContext.Messages.Find(m => true).SortByDescending(m => m.CreatedDate)
+                .ToListAsync();
         }
 
-        public async Task<IEnumerable<Message>> GetMessagesByUser(string userId)
+        public async Task<MessageResult> GetMessagesByUser(string userId, int page)
         {
-            return await _notificationContext.Messages.Find(m => m.UserId == userId).ToListAsync();
+            int pageSize = 8;
+            int skip = (page - 1) * pageSize;
+
+            var query = _notificationContext.Messages.Find(m => m.UserId == userId);
+
+            long totalRows = await query.CountDocumentsAsync();
+
+            var messages = await query
+                .SortByDescending(m => m.CreatedDate)
+                .Skip(skip)
+                .Limit(pageSize)
+                .ToListAsync();
+            MessageResult result = new MessageResult
+            {
+                Messages = messages,
+                TotalMessage = totalRows
+            };
+
+            return result;
+        }
+
+        [Obsolete]
+        public async Task<long> GetNewMessageCount(string userId)
+        {
+            FilterDefinition<Message> filter = Builders<Message>.Filter.And(
+                Builders<Message>.Filter.Eq(m => m.UserId, userId),
+                Builders<Message>.Filter.Eq(m => m.IsSeen, false)
+            );
+
+            return await _notificationContext.Messages.CountAsync(filter);
+        }
+
+        public async Task<bool> IsExisted(string userId, string type, int ApplicationId)
+        {
+            FilterDefinition<Message> filter = Builders<Message>.Filter.And(
+                Builders<Message>.Filter.Eq(m => m.UserId, userId),
+                 Builders<Message>.Filter.Eq(m => m.Type, type),
+                  Builders<Message>.Filter.Eq(m => m.ApplicationId, ApplicationId)
+                );
+
+            return await _notificationContext.Messages.Find(filter).AnyAsync();
         }
 
         public async Task<bool> UpdateMessage(Message message)

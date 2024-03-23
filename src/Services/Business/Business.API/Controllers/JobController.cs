@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Newtonsoft.Json;
+using Business.Application.Features.Jobs.Queries.GetJobsFromBusiness;
 
 namespace Business.API.Controllers
 {
@@ -54,6 +55,18 @@ namespace Business.API.Controllers
             var jobs = await _mediator.Send(getJobsQuery);
             return Ok(jobs);
         }
+        [HttpGet("GetJobsByBusiness/{businessId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetJobDTO>>> GetJobByBusiness( int businessId)
+        {
+            var query = new GetJobFromBusinessQuery
+            {
+                BusinessId = businessId
+            };
+            var jobs = await _mediator.Send(query);
+
+            return Ok(jobs);
+        }
 
         [HttpGet("GetJobManagement")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -85,7 +98,7 @@ namespace Business.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetJobDetailDTO>> GetJob(int id)
         {
-            var query = new GetJobDetailQuery{ Id = id };
+            var query = new GetJobDetailQuery { Id = id };
             var jobDetail = await _mediator.Send(query);
 
             return Ok(jobDetail);

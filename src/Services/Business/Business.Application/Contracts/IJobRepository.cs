@@ -16,6 +16,8 @@ namespace Business.Application.Contracts
             decimal? minSalary, decimal? maxSalary, int? career, List<string> experience,
             string date, List<string> position, List<string> education);
 
+        Task<List<GetJobDTO>> GetJobsFromBusiness(int businessId);
+
         Task<Job> GetJobById(int id);
 
         Task<List<GetJobManagementDTO>> GetJobManagements(int? page, int businessId);

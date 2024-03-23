@@ -25,6 +25,48 @@ namespace Business.Infrastructure.Repositories
             _dbContext.Entry(businessInfor).State = EntityState.Modified;
         }
 
+        public async Task<BusinessInfor> GetBusinessDetail(int id)
+        {
+            var business = await _dbContext.Businesses.Where(b => b.Id == id)
+                .Select(b => new BusinessInfor
+                {
+                    Id = b.Id,
+                    FullName = b.FullName,
+                    ShortName = b.ShortName,
+                    BusinessSize = b.BusinessSize,
+                    PhoneNumber = b.PhoneNumber,
+                    Address = b.Address,
+                    Email = b.Email,
+                    Description = b.Description,
+                    FaceBookUrl = b.FaceBookUrl,
+                    WebsiteUrl = b.WebsiteUrl,
+                    LogoUrl = b.LogoUrl,
+                    LinkedInUrl = b.LinkedInUrl,
+                    FoundedYear = b.FoundedYear,
+                    LicenseBack = b.LicenseBack,
+                    LicenseFont = b.LicenseFont,
+                    TaxCode = b.TaxCode,
+                    latitude = b.latitude,
+                    longitude = b.longitude,
+                    UserId = b.UserId,
+                    CreatedDate = b.CreatedDate,
+                    Areas = b.Areas.Select(a => new Area
+                    {
+                        Id = a.Id,
+                        CareerId = a.CareerId,
+                    }).ToList(),
+                    Medias = b.Medias
+                    .Select(p => new Media
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Type = p.Type,
+                    }).ToList(),
+                }).FirstOrDefaultAsync();
+
+            return business;
+        }
+
         public async Task<BusinessInfor> GetBusinessID(string userId)
         {
             return await _dbContext.Businesses.Where(b => b.UserId == userId).FirstOrDefaultAsync();

@@ -26,7 +26,9 @@ namespace Business.Application.Mappings
             CreateMap<BusinessInfor, CreateBusinessInforDTO>().ReverseMap();
             CreateMap<BusinessInfor, UpdateBusinessInforDTO>().ReverseMap();
             CreateMap<BusinessInfor, GetBusinessIdDTO>().ReverseMap();
-            CreateMap<BusinessInfor, GetBusinessPartDTO>().ReverseMap();
+            CreateMap<BusinessInfor, GetBusinessPartDTO>()
+                .ForMember(dest => dest.BusinessUserId, act => act.MapFrom(src => src.UserId))
+                .ReverseMap();
 
             CreateMap<Media, MediaDTO>().ReverseMap();
             CreateMap<Media, UploadMediaDTO>().ReverseMap();

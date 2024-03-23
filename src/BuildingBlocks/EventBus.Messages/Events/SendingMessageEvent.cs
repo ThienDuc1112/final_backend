@@ -8,6 +8,7 @@ namespace EventBus.Messages.Events
 {
     public class SendingMessageEvent : IntegrationBaseEvent
     {
+        public int ApplicationId { get; set; }
         public string UserId { get; set; }
         public string BusinessName { get; set; }
         public string FullName { get; set; }

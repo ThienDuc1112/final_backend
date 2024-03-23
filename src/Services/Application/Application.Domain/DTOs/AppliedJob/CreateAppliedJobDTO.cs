@@ -19,5 +19,8 @@ namespace Application.Domain.DTOs.AppliedJob
         [Required(ErrorMessage = "ResumeId cannot be empty !!")]
         [Range(1, long.MaxValue, ErrorMessage = "ResumeId must be greater than 0")]
         public int ResumeId { get; set; }
+
+        [Required(ErrorMessage = "BusinessUserId cannot be empty !!")]
+        public string BusinessUserId { get; set; }
     }
 }

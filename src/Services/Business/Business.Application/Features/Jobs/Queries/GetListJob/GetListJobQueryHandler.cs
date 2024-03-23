@@ -26,7 +26,6 @@ namespace Business.Application.Features.Jobs.Queries.GetListJob
 
         public async Task<List<GetJobDTO>> Handle(GetListJobQuery request, CancellationToken cancellationToken)
         {
-            _logger.LogCritical($"Get data: {request.Experience.Count}");
             var jobs = await _jobRepository.GetJobs(
                                            request.Page,
                                            request.Query,
@@ -41,7 +40,7 @@ namespace Business.Application.Features.Jobs.Queries.GetListJob
                                            );
             foreach(var job in jobs)
             {
-                job.Skills = job.RequiredSkills.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+                job.Skills = job.RequiredSkills.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
             }
             return jobs;
 

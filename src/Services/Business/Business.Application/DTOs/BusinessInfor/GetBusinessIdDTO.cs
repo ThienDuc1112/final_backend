@@ -9,5 +9,6 @@ namespace Business.Application.DTOs.BusinessInfor
     public class GetBusinessIdDTO
     {
         public int Id { get; set; }
+        public string IsApproved { get; set; }
     }
 }

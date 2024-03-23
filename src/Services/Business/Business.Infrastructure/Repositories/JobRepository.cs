@@ -100,7 +100,7 @@ namespace Business.Infrastructure.Repositories
             }
             if (position != null && position.Any())
             {
-                jobQuery = jobQuery.Where(x => position.Contains(x.Title));
+                jobQuery = jobQuery.Where(x => position.Contains(x.CareerLevel));
             }
 
             if (education != null && education.Any())
@@ -153,6 +153,31 @@ namespace Business.Infrastructure.Repositories
                 .Skip(itemsToSkip)
                 .Take(pageSize)
                 .ToListAsync();
+
+            return jobs;
+        }
+
+        public async Task<List<GetJobDTO>> GetJobsFromBusiness(int businessId)
+        {
+            var jobs = await _dbContext.Jobs
+                 .Select(j => new GetJobDTO
+                 {
+                     BusinessId = j.BusinessId,
+                     FullName = j.Business.FullName,
+                     LogoUrl = j.Business.LogoUrl,
+                     Address = j.Business.Address,
+                     Id = j.Id,
+                     JobType = j.JobType,
+                     Title = j.Title,
+                     SalaryMax = j.SalaryMax,
+                     SalaryMin = j.SalaryMin,
+                     RequiredSkills = j.RequiredSkills,
+                     ExpirationDate = j.ExpirationDate,
+                     Description = j.Description
+                 })
+                 .Where(j => j.BusinessId == businessId)
+                 .OrderByDescending(j => j.Id)
+                 .ToListAsync();
 
             return jobs;
         }

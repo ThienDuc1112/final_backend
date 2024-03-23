@@ -4,6 +4,7 @@ using Notification.API.Repositories;
 using EventBus.Messages.Common;
 using MassTransit;
 using Notification.API.EventBusConsumer;
+using Notification.API.MyHub;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -20,6 +21,10 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<INotificationContext, NotificationContext>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddSignalR();
+builder.Services.AddCors(options => {
+    options.AddPolicy("CORSPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true));
+});
 
 builder.Services.AddMassTransit(config =>
 {
@@ -43,10 +48,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notification.API v1"));
 }
 
+app.UseCors("CORSPolicy");
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
-
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+    endpoints.MapHub<MessageHub>("/notificationHub");
+});
 app.MapControllers();
 
 app.Run();

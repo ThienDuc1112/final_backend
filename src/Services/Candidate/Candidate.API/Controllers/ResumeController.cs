@@ -54,9 +54,9 @@ namespace Candidate.API.Controllers
 
         [HttpGet("ViewResume/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ResumeDTO>> GetResume(int resumeId)
+        public async Task<ActionResult<ResumeDTO>> GetResume(int id)
         {
-            var query = new GetResumeQuery { ResumeId = resumeId };
+            var query = new GetResumeQuery { ResumeId = id };
             var response = await _mediator.Send(query);
             return Ok(response);
         }

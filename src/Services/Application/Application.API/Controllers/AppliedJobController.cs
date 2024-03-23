@@ -148,11 +148,12 @@ namespace Application.API.Controllers
                     var resume = await _resumeGrpcService.GetResume(appliedJob.ResumeId);
                     var message = new SendingMessageEvent
                     {
+                        ApplicationId = appliedJob.Id,
                         BusinessName = job.BusinessName,
                         Title = job.Title,
                         FullName = resume.FullName,
                         Type = "Applying",
-                        UserId = appliedJob.CandidateId,
+                        UserId = appliedJobDTO.BusinessUserId,
                     };
                     await _publishEndpoint.Publish(message);
                 }
@@ -192,6 +193,19 @@ namespace Application.API.Controllers
                     response.Id = 1;
                     response.Success = true;
                     response.Message = "Updating job application succcesfully";
+
+                    var job = await _jobGrpcService.GetJob(app.JobId);
+                    var message = new SendingMessageEvent
+                    {
+                        ApplicationId = app.Id,
+                        BusinessName = job.BusinessName,
+                        Title = job.Title,
+                        UserId = app.CandidateId,
+                        Type = appliedJobDTO.Status,
+                        FullName = "user"
+                    };
+                 
+                    await _publishEndpoint.Publish(message);
                 }
             }
             return Ok(response);

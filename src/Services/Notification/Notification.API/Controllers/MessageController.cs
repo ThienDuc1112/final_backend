@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Notification.API.DTOs;
 using Notification.API.Entities;
 using Notification.API.Repositories;
@@ -24,17 +25,27 @@ namespace Notification.API.Controllers
             return Ok(messages);
         }
 
+        [HttpGet("GetNewMessageCount/{userId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> GetNewMessage(string userId)
+        {
+            var count = await _messageRepository.GetNewMessageCount(userId);
+
+            return Ok(count);
+        }
+
         [HttpGet("GetMessagesByUser/{userId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessagesByUser(string userId)
+        public async Task<ActionResult<MessageResult>> GetMessagesByUser(string userId, int page = 1)
         {
-            var messages = await _messageRepository.GetMessagesByUser(userId);
-            if(messages == null)
+            var result = await _messageRepository.GetMessagesByUser(userId, page);
+            if(result == null)
             {
                 return NotFound();
             }
-            return Ok(messages);
+
+            return Ok(result);
         }
 
 
@@ -52,7 +63,7 @@ namespace Notification.API.Controllers
                 IsSeen = false,
                 Title = message.Title,
                 Type = message.Type,
-                UserId = message.UserId
+                UserId = message.UserId,
             };
             await _messageRepository.CreateMessage(mess);
             return NoContent();
@@ -60,7 +71,7 @@ namespace Notification.API.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(Message), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateProduct([FromBody] Message message)
+        public async Task<IActionResult> UpdateMessage([FromBody] Message message)
         {
             return Ok(await _messageRepository.UpdateMessage(message));
         }

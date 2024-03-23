@@ -2,6 +2,7 @@
 using Business.Application.Features.Areas.Commands.CreateArea;
 using Business.Application.Features.BusinessInfors.Commands.CreateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Commands.UpdateBusinessInfor;
+using Business.Application.Features.BusinessInfors.Queries.GetBusinessById;
 using Business.Application.Features.BusinessInfors.Queries.GetBusinessInfor;
 using Business.Application.Features.BusinessInfors.Queries.GetIDBusiness;
 using Business.Application.Responses;
@@ -31,6 +32,16 @@ namespace Business.API.Controllers
         public async Task<ActionResult<BusinessInforDTO>> GetBusinessInfor(string id)
         {
             var query = new GetBusinessInforQuery { Id = id };
+            var businessInfor = await _mediator.Send(query);
+
+            return Ok(businessInfor);
+        }
+
+        [HttpGet("BusinessDetail/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<BusinessInforDTO>> GetBusinessDetail(int id)
+        {
+            var query = new GetBusinessByIdQuery { Id = id };
             var businessInfor = await _mediator.Send(query);
 
             return Ok(businessInfor);

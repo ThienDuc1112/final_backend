@@ -7,11 +7,6 @@ using Candidate.Application.Exceptions;
 using Candidate.Application.GrpcServices;
 using Candidate.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Candidate.Application.Features.Resumes.Queries.GetResume
 {
