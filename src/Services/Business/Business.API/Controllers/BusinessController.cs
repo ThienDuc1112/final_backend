@@ -1,10 +1,12 @@
 ﻿using Business.Application.DTOs.BusinessInfor;
 using Business.Application.Features.Areas.Commands.CreateArea;
 using Business.Application.Features.BusinessInfors.Commands.CreateBusinessInfor;
+using Business.Application.Features.BusinessInfors.Commands.ReviewBusinessInfor;
 using Business.Application.Features.BusinessInfors.Commands.UpdateBusinessInfor;
 using Business.Application.Features.BusinessInfors.Queries.GetBusinessById;
 using Business.Application.Features.BusinessInfors.Queries.GetBusinessInfor;
 using Business.Application.Features.BusinessInfors.Queries.GetIDBusiness;
+using Business.Application.Features.Jobs.Queries.GetBusinessListAdmin;
 using Business.Application.Responses;
 using Business.Infrastructure.Persistance;
 using MediatR;
@@ -25,6 +27,19 @@ namespace Business.API.Controllers
         {
             _mediator = mediator;
             _dbContext = dbContext;
+        }
+
+        [HttpGet("BusinessList")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetBusinessListAdminDTO>> GetBusinessList( [FromQuery(Name = "status")] string? status,[FromQuery(Name = "page")] int page = 1)
+        {
+            var query = new GetBusinessListAdminQuery
+            {
+                Page = page,
+                Status = status
+            };
+            var data = await _mediator.Send(query);
+            return Ok(data);
         }
 
         [HttpGet("BusinessInforDetail/{id}")]
@@ -76,6 +91,17 @@ namespace Business.API.Controllers
             return NoContent();
         }
 
-       
+        [HttpPut("ReviewBusiness")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> ReviewBusiness([FromBody] ReviewBusinessInforDTO businessInforDTO)
+        {
+            var command = new ReviewBusinessInforCommand { BusinessInforDTO = businessInforDTO };
+           var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+
     }
 }

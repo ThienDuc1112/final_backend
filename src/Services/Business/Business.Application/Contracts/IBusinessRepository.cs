@@ -14,5 +14,7 @@ namespace Business.Application.Contracts
         Task<BusinessInfor> GetBusinessInforWithRelevant(string businessId);
         Task<BusinessInfor> GetBusinessDetail(int id);
         Task<BusinessInfor> GetBusinessID(string userId);
+
+        Task<GetBusinessListAdminDTO> GetBusinessListAdmin(int page, string? status);
     }
 }

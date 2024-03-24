@@ -52,7 +52,7 @@ namespace Provider.Infrastructure.Repositories
         public async Task Update(T entity)
         {
             _providerDbContext.Entry(entity).State = EntityState.Modified;
-            _providerDbContext.SaveChangesAsync();
+           await  _providerDbContext.SaveChangesAsync();
         }
     }
 }

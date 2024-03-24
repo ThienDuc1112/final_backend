@@ -11,5 +11,6 @@ namespace Provider.Application.Contracts.Persistence
     {
         Task<bool> IsExisted(string name);
         Task<List<Career>> GetCareersWithSkills();
+        Task<List<Career>> GetActiveCareers();
     }
 }

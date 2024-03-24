@@ -31,8 +31,8 @@ namespace Business.Application.Features.BusinessInfors.Commands.ReviewBusinessIn
             {
                 throw new NotFoundException(nameof(businessInfor), request.BusinessInforDTO.Id);
             }
-            var business = _mapper.Map<BusinessInfor>(businessInfor);
-            await _unitOfWork.BusinessRepository.AcceptOrReject(business);
+            var business = _mapper.Map(request.BusinessInforDTO, businessInfor);
+            await _unitOfWork.BusinessRepository.Update(business);
             await _unitOfWork.Save();
 
             return Unit.Value;

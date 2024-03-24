@@ -12,6 +12,10 @@ namespace Provider.Application.Features.Careers.Commands.UpdateCareer
     {
         public UpdateCareerValidator()
         {
+            RuleFor(c => c.Id)
+              .NotEmpty().WithMessage("{PropertyName} is required.")
+              .NotNull();
+
             RuleFor(c => c.Description)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                .NotNull()

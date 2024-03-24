@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Provider.Application.DTOs.Career;
 using Provider.Application.Features.Careers.Commands.CreateCareer;
 using Provider.Application.Features.Careers.Commands.DeleteCareer;
+using Provider.Application.Features.Careers.Commands.TriggerCareer;
 using Provider.Application.Features.Careers.Commands.UpdateCareer;
+using Provider.Application.Features.Careers.Queries.GetCareerAdminList;
 using Provider.Application.Features.Careers.Queries.GetCareerList;
 using Provider.Application.Features.Careers.Queries.GetCareersWithSkills;
 using Provider.Application.Responses;
@@ -31,6 +33,14 @@ namespace Provider.API.Controllers
             var careers = await _mediator.Send(query);
             return Ok(careers);
         }
+        [HttpGet("GetAdminCareers")]
+        [ProducesResponseType(typeof(IEnumerable<CareerDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<CareerDTO>>> GetAdminCareers()
+        {
+            var query = new GetCareerAdminListQuery();
+            var careers = await _mediator.Send(query);
+            return Ok(careers);
+        }
 
         [HttpGet("GetCareersWithSkills")]
         [ProducesResponseType(typeof(IEnumerable<GetCareerDTO>), (int)HttpStatusCode.OK)]
@@ -50,13 +60,24 @@ namespace Provider.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}", Name = "UpdateCareer")]
+        [HttpPut(Name = "UpdateCareer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateCareerDTO careerDTO)
         {
             var command = new UpdateCareerCommand { CareerDTO = careerDTO };
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPut("TriggerCareer")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> TriggerCareer([FromBody] TriggerCareerDTO careerDTO)
+        {
+            var command = new TriggerCareerCommand { TriggerCareerDTO = careerDTO };
             await _mediator.Send(command);
             return NoContent();
         }

@@ -21,8 +21,9 @@ namespace Business.Infrastructure.Repositories
         }
         public async Task AcceptOrReject(BusinessInfor businessInfor)
         {
-           
+
             _dbContext.Entry(businessInfor).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<BusinessInfor> GetBusinessDetail(int id)
@@ -110,8 +111,35 @@ namespace Business.Infrastructure.Repositories
                         Type = p.Type,
                     }).ToList(),
                 }).FirstOrDefaultAsync();
-            
+
             return await business;
+        }
+
+        public async Task<GetBusinessListAdminDTO> GetBusinessListAdmin(int page, string? status)
+        {
+            int pageSize = 10;
+            int skip = (page - 1) * pageSize;
+             IQueryable<BusinessInfor> query = _dbContext.Businesses;
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(x => x.IsApproved.Contains(status));
+            }
+            var businessList = await query
+                .Select(b => new GetBusinessAdminDTO
+                {
+                    Id = b.Id,
+                    CreatedDate = b.CreatedDate,
+                    IsApproved = b.IsApproved,
+                    Email = b.Email,
+                    FullName = b.FullName,
+                    LogoUrl = b.LogoUrl
+                })
+                .OrderByDescending(b => b.CreatedDate)
+                .AsNoTracking()
+                .ToListAsync();
+            var total = await _dbContext.Businesses.CountAsync();
+
+            return new GetBusinessListAdminDTO { GetBusinessAdminDTOs = businessList, TotalNumber = total };
         }
     }
 }

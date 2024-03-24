@@ -14,7 +14,7 @@ namespace Provider.Infrastructure.Persistance
         {
         }
 
-        public virtual async Task<int> SaveChangesAsync(string username = "SYSTEM")
+        public virtual async Task<int> SaveChangesAsync(string username = "admin")
         {
             foreach (var entry in base.ChangeTracker.Entries<EntityBase>()
                 .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))

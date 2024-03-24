@@ -18,6 +18,15 @@ namespace Provider.Infrastructure.Repositories
             _dbcontext = dbContext;
         }
 
+        public async Task<List<Career>> GetActiveCareers()
+        {
+            var careers = await _dbcontext.Careers
+                .Where(c => c.IsAllowed == true)
+                .OrderByDescending(s => s.Id)
+                .ToListAsync();
+            return careers;
+        }
+
         public async Task<List<Career>> GetCareersWithSkills()
         {
             var careers = await _dbcontext.Careers.Include(s => s.Skills).ToListAsync();

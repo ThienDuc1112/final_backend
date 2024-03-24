@@ -11,5 +11,6 @@ namespace Provider.Application.Contracts.Persistence
     {
         Task<IEnumerable<Skill>> GetSkillsByCarrerId(int carrerId);
         Task<bool> IsExisted(string nameSkill);
+        Task<List<Skill>> GetActiveSkills();
     }
 }

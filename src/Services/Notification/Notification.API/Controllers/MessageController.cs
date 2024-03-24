@@ -37,7 +37,7 @@ namespace Notification.API.Controllers
         [HttpGet("GetMessagesByUser/{userId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<MessageResult>> GetMessagesByUser(string userId, int page = 1)
+        public async Task<ActionResult<MessageResult>> GetMessagesByUser(string userId, [FromQuery(Name = "page")] int page = 1)
         {
             var result = await _messageRepository.GetMessagesByUser(userId, page);
             if(result == null)

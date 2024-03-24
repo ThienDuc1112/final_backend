@@ -18,6 +18,13 @@ namespace Provider.Infrastructure.Repositories
             _dbcontext = dbContext;
         }
 
+        public async Task<List<Skill>> GetActiveSkills()
+        {
+            return await _dbcontext.Skills.Where(s => s.CreatedBy == "admin")
+                .OrderByDescending(s => s.Id)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Skill>> GetSkillsByCarrerId(int carrerId)
         {
             return await _dbcontext.Skills.Where(s => s.Career.Id == carrerId)

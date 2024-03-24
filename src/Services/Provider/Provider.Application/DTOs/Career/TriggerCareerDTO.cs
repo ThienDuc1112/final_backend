@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Provider.Application.DTOs.Career
 {
-    public class CareerDTO
+    public class TriggerCareerDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
         public bool IsAllowed { get; set; }
-        public DateTime CreatedDate { get; set; }
     }
 }

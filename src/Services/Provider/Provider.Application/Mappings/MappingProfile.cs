@@ -19,12 +19,16 @@ namespace Provider.Application.Mappings
             CreateMap<Career, CreateCareerDTO>().ReverseMap();
             CreateMap<Career, UpdateCareerDTO>().ReverseMap();
             CreateMap<Career, GetCareerDTO>().ReverseMap();
+            CreateMap<Career, TriggerCareerDTO>().ReverseMap();
 
             CreateMap<Skill, SkillDTO>()
                 .ForMember(dest => dest.CareerDTO, act => act.MapFrom(src => src.Career)).ReverseMap();
             CreateMap<Skill, CreateSkillDTO>().ReverseMap();
             CreateMap<Skill, UpdateSkillDTO>().ReverseMap();
             CreateMap<Skill, GetSkillDTO>()
+                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NameSkill))
+                .ReverseMap();
+            CreateMap<Skill, GetSkillAdminDTO>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NameSkill))
                 .ReverseMap();
 
