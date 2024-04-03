@@ -31,6 +31,7 @@ namespace Provider.Application.Mappings
             CreateMap<Skill, GetSkillAdminDTO>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NameSkill))
                 .ReverseMap();
+            CreateMap<Skill, TriggerSkillDTO>().ReverseMap();
 
             CreateMap<Language, LanguageDTO>().ReverseMap();
             CreateMap<Language, CreateLanguageDTO>().ReverseMap();

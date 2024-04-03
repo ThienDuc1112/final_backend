@@ -1,0 +1,34 @@
+syntax = "proto3";
+option csharp_namespace = "Business.Grpc.Protos";
+
+service MatchingJobProtoService {
+	rpc GetMatchingJob(GetMatchingJobRequest) returns(MatchingJobModel);
+}
+
+
+message GetMatchingJobRequest {
+	int32 jobId = 1;
+}
+
+message MatchingJobModel {
+	int32 id = 1;
+	string educationLevelMin = 2;
+	string yearExpMin = 3;
+	string genderRequirement = 4;
+	int32 languageRequirementId = 5;
+	string requirement = 6;
+	string requiredSkills = 7;
+	int32 careerId = 8;
+	int32 businessId = 9;
+	string fullName = 10;
+	string logoUrl = 11;
+	string title = 12;
+	string jobType = 13;
+	int64 salaryMin = 14;
+	int64 salaryMax = 15;
+	string expirationDate = 16;
+}
+
+message GetMatchingJobResponse {
+  repeated MatchingJobModel matchingJobs = 1;
+}

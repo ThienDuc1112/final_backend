@@ -34,6 +34,12 @@ namespace Provider.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Language>> GetActiveLanguages()
+        {
+            return await _dbcontext.Languages.GroupBy(l => l.LanguageName)
+                    .Select(g => g.First()).ToListAsync();
+        }
+
         public async Task<bool> IsExisted(string name, string level)
         {
             var existedLanguage = _dbcontext.Languages.AnyAsync(l => l.LanguageName == name && l.Level == level);

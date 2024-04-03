@@ -1,14 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Provider.Application.DTOs.Career;
 using Provider.Application.DTOs.Skill;
-using Provider.Application.Features.Careers.Commands.CreateCareer;
-using Provider.Application.Features.Careers.Commands.DeleteCareer;
-using Provider.Application.Features.Careers.Commands.UpdateCareer;
-using Provider.Application.Features.Careers.Queries.GetCareerList;
 using Provider.Application.Features.Skills.Commands.CreateSkill;
 using Provider.Application.Features.Skills.Commands.DeleteSkill;
+using Provider.Application.Features.Skills.Commands.TriggerSkill;
 using Provider.Application.Features.Skills.Commands.UpdateSkill;
+using Provider.Application.Features.Skills.Queries.GetSkillByAdmin;
 using Provider.Application.Features.Skills.Queries.GetSkillListByCareer;
 using Provider.Application.Responses;
 using System.Net;
@@ -31,6 +28,14 @@ namespace Provider.API.Controllers
         public async Task<ActionResult<IEnumerable<SkillDTO>>> GetSkillsByCareerId(int careerId)
         {
             var query = new GetSkillListByCareerQuery(careerId);
+            var skills = await _mediator.Send(query);
+            return Ok(skills);
+        }
+        [HttpGet( "GetSkillsByAdmin")]
+        [ProducesResponseType(typeof(GetSkillAdminListDTO), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetSkillAdminListDTO>> GetSkillsByAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "careerId")] int careerId)
+        {
+            var query = new GetSkillByAdminQuery { CareerId = careerId, Page = page };
             var skills = await _mediator.Send(query);
             return Ok(skills);
         }
@@ -62,6 +67,17 @@ namespace Provider.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteSkillCommand { Id = id };
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPut("TriggerSkill")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> TriggerCareer([FromBody] TriggerSkillDTO skillDTO)
+        {
+            var command = new TriggerSkillCommand { TriggerSkillDTO = skillDTO };
             await _mediator.Send(command);
             return NoContent();
         }

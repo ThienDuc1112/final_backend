@@ -17,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.ML" Version="3.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
   </ItemGroup>
@@ -29,6 +30,12 @@
   <ItemGroup>
     <Protobuf Include="..\..\Business\Business.Grpc\Protos\Job.proto" GrpcServices="Client">
       <Link>Protos\Job.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\Business\Business.Grpc\Protos\matchingJob.proto" GrpcServices="Client">
+      <Link>Protos\matchingJob.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\Candidate\Candidate.Grpc\Protos\matching.proto" GrpcServices="Client">
+      <Link>Protos\matching.proto</Link>
     </Protobuf>
     <Protobuf Include="..\..\Candidate\Candidate.Grpc\Protos\resume.proto" GrpcServices="Client">
       <Link>Protos\resume.proto</Link>

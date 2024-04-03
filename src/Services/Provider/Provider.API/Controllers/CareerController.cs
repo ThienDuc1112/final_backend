@@ -67,8 +67,8 @@ namespace Provider.API.Controllers
         public async Task<ActionResult> Update([FromBody] UpdateCareerDTO careerDTO)
         {
             var command = new UpdateCareerCommand { CareerDTO = careerDTO };
-            await _mediator.Send(command);
-            return NoContent();
+            var response =  await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpPut("TriggerCareer")]

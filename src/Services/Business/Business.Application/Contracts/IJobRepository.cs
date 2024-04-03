@@ -19,6 +19,7 @@ namespace Business.Application.Contracts
         Task<List<GetJobDTO>> GetJobsFromBusiness(int businessId);
 
         Task<Job> GetJobById(int id);
+        Task<List<Job>> GetJobByCareerId(int careerId);
 
         Task<List<GetJobManagementDTO>> GetJobManagements(int? page, int businessId);
         Task<List<Job>> GetJobApp(int businessId);

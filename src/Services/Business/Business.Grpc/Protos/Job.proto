@@ -19,3 +19,4 @@ message JobModel {
 	string businessName = 5;
 	string avatarUrl = 6;
 }
+

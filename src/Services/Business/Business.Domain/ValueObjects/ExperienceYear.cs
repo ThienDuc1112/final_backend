@@ -15,7 +15,7 @@ namespace Business.Domain.ValueObjects
         public static ExperienceYear LessThanOne => new(1, "Less than one year");
         public static ExperienceYear OneToThree => new(2, "One to three years");
         public static ExperienceYear ThreeToFive => new(3, "Three to five years");
-        public static ExperienceYear FiveToTen => new(4, "Five to Ten years");
+        public static ExperienceYear FiveToTen => new(4, "Five to ten years");
         public static ExperienceYear TenPlus => new ExperienceYear(5, "More than 10 years");
 
         public static IEnumerable<ExperienceYear> GetYearExperiences

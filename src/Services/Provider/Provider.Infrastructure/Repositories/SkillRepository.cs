@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Provider.Application.Contracts.Persistence;
+using Provider.Application.DTOs.Skill;
 using Provider.Domain.Entities;
 using Provider.Infrastructure.Persistance;
 using System;
@@ -23,6 +24,42 @@ namespace Provider.Infrastructure.Repositories
             return await _dbcontext.Skills.Where(s => s.CreatedBy == "admin")
                 .OrderByDescending(s => s.Id)
                 .ToListAsync();
+        }
+
+        public async Task<GetSkillAdminListDTO> GetSkillsByAdmin(int page, int carrerId)
+        {
+            int pageSize = 10;
+            int skip = (page - 1) * pageSize;
+
+            IQueryable<Skill> query =  _dbcontext.Skills;
+            if(carrerId != 0)
+            {
+                query = query.Where(s => s.CareerId == carrerId);
+            }
+
+            var skillList = await query
+                .Select(s => new GetSkillAdminDTO
+                {
+                    Id = s.Id,
+                    CareerName = s.Career.Name,
+                    CreatedBy = s.CreatedBy,
+                    CreatedDate = s.CreatedDate,
+                    Name = s.NameSkill
+                })
+                .Skip(skip)
+                .Take(pageSize)
+                .OrderByDescending(s => s.Id)
+                .AsNoTracking()
+                .ToListAsync();
+            var total = await _dbcontext.Skills.CountAsync();
+
+            GetSkillAdminListDTO skills = new GetSkillAdminListDTO
+            {
+                GetSkillAdminDTOs = skillList,
+                TotalNumber = total,
+            };
+
+            return skills;
         }
 
         public async Task<IEnumerable<Skill>> GetSkillsByCarrerId(int carrerId)

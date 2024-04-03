@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Protos\Job.proto" />
+    <None Remove="Protos\matchingJob.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\Job.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\matchingJob.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

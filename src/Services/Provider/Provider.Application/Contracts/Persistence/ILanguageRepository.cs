@@ -12,6 +12,7 @@ namespace Provider.Application.Contracts.Persistence
         Task<bool> IsExisted(string name, string level);
         Task RemoveLanguage(int id);
         Task AllowLanguage(int id);
+        Task<IEnumerable<Language>> GetActiveLanguages();
         
     }
 }

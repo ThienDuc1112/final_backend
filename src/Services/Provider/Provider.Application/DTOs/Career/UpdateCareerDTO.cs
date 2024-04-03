@@ -9,6 +9,7 @@ namespace Provider.Application.DTOs.Career
     public class UpdateCareerDTO
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
     }
 }

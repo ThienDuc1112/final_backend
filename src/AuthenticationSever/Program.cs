@@ -1,11 +1,15 @@
 using AuthenticationSever.Configuration;
 using AuthenticationSever.Data;
 using AuthenticationSever.Entities;
+using AuthenticationSever.ExtensionGrant;
+using AuthenticationSever.Extensions;
 using AuthenticationSever.Repositories.Abstract;
 using AuthenticationSever.Repositories.Implementation;
+using IdentityServer4;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -48,10 +52,27 @@ builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential()
     .AddInMemoryPersistedGrants()
     .AddInMemoryIdentityResources(Config.GetIdentityResources())
-    //.AddInMemoryApiResources(Config.GetApiResources())
     .AddInMemoryClients(Config.GetClients())
     .AddInMemoryApiScopes(Config.ApiScopes)
-    .AddAspNetIdentity<ManageUser>();
+    .AddAspNetIdentity<ManageUser>()
+    .AddExtensionGrantValidator<ExternalAuthenticationGrant<ManageUser>>();
+
+
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+//    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+//})
+//    .AddGoogle(googleOptions =>
+//    {
+//        googleOptions.ClientId = "25722280879-r97hgd7ff9n76u59n7rrimh39ctmrutj.apps.googleusercontent.com";
+//        googleOptions.ClientSecret = "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";
+//        googleOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+//    });
+
+builder.Services.AddServices<ManageUser>()
+                    .AddRepositories()
+                    .AddProviders<ManageUser>();
 
 
 
@@ -68,8 +89,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors("AllowLocalhost3000");
-//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 

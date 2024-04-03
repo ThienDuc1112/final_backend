@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Candidate.Application.Contracts.Persistence;
+using Candidate.Application.GrpcServices;
 using Candidate.Grpc.Protos;
 using Grpc.Core;
 
@@ -8,13 +9,12 @@ namespace Candidate.Grpc.Services
     public class ResumeService : ResumeProtoService.ResumeProtoServiceBase
     {
         private readonly IResumeRepository resumeRepository;
-        private readonly ILogger<ResumeService> logger;
         private readonly IMapper _mapper;
+       
 
-        public ResumeService(IResumeRepository resumeRepository, ILogger<ResumeService> logger, IMapper mapper)
+        public ResumeService(IResumeRepository resumeRepository, IMapper mapper)
         {
             this.resumeRepository = resumeRepository;
-            this.logger = logger;
             _mapper = mapper;
         }
 

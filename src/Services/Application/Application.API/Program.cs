@@ -22,11 +22,17 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddGrpcClient<JobProtoService.JobProtoServiceClient>
                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcJobUrl"]));
+builder.Services.AddGrpcClient<MatchingJobProtoService.MatchingJobProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcJobUrl"]));
 builder.Services.AddGrpcClient<ResumeProtoService.ResumeProtoServiceClient>
+               (o => o.Address = new Uri(configuration["GrpcSettings:GrpcResumeUrl"]));
+builder.Services.AddGrpcClient<MatchingResumeProtoService.MatchingResumeProtoServiceClient>
                (o => o.Address = new Uri(configuration["GrpcSettings:GrpcResumeUrl"]));
 
 builder.Services.AddScoped<JobGrpcService>();
 builder.Services.AddScoped<ResumeGrpcService>();
+builder.Services.AddScoped<MatchingResumeGrpcService>();
+builder.Services.AddScoped<MatchingJobGrpcService>();
 
 builder.Services.AddCors(options =>
 {

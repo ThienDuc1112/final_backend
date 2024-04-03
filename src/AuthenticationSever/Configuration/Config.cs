@@ -22,16 +22,6 @@
 
         }
 
-        //public static IEnumerable<ApiResource> GetApiResources()
-        //{
-        //    return new List<ApiResource>
-        //{
-        //    new ApiResource("providerAPI", "Provider API"),
-        //    new ApiResource("api1", "Job API"),
-        //    new ApiResource("candidateAPI", "Candidate API")
-        //};
-        //}
-
         public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
@@ -59,7 +49,9 @@
             new Client
             {
                 ClientId = "nextjs",
-                AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials
+        .Concat(new[] { "external" }) 
+        .ToList(),
                 ClientSecrets = { new Secret("adminSecret".Sha256()) },
                 AllowedScopes = { "providerAPI", "jobAPI", "candidateAPI", "openid", "profile", "email", "roles","offline_access" },
                 AccessTokenLifetime = 3600,

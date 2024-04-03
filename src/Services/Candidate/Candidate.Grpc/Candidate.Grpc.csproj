@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\matching.proto" />
     <None Remove="Protos\resume.proto" />
   </ItemGroup>
 
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\matching.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\resume.proto" GrpcServices="Server" />
   </ItemGroup>
 

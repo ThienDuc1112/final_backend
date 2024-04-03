@@ -32,6 +32,16 @@ namespace Business.Infrastructure.Repositories
             return jobs;
         }
 
+        public async Task<List<Job>> GetJobByCareerId(int careerId)
+        {
+            return await _dbContext.Jobs
+                .Where(j => j.CareerId == careerId)
+                .Include(j => j.Business)
+                .AsNoTracking()
+                .ToListAsync();
+                
+        }
+
         public async Task<Job> GetJobById(int id)
         {
             return await _dbContext.Jobs

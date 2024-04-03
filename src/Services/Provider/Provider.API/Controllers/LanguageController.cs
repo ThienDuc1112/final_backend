@@ -5,6 +5,7 @@ using Provider.Application.DTOs.Skill;
 using Provider.Application.Features.Languages.Commands.CreateLanguage;
 using Provider.Application.Features.Languages.Commands.DeleteLanguage;
 using Provider.Application.Features.Languages.Commands.EnableLanguage;
+using Provider.Application.Features.Languages.Queries.GetAdminLanguageList;
 using Provider.Application.Features.Languages.Queries.GetLanguageList;
 using Provider.Application.Features.Skills.Commands.CreateSkill;
 using Provider.Application.Features.Skills.Commands.DeleteSkill;
@@ -31,6 +32,14 @@ namespace Provider.API.Controllers
         public async Task<ActionResult<IEnumerable<LanguageDTO>>> GetLangugages()
         {
             var query = new GetLanguageListQuery();
+            var languages = await _mediator.Send(query);
+            return Ok(languages);
+        }
+        [HttpGet("GetAdminLanguages")]
+        [ProducesResponseType(typeof(IEnumerable<LanguageDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<LanguageDTO>>> GetAdminLangugages()
+        {
+            var query = new GetAdminLanguageListQuery();
             var languages = await _mediator.Send(query);
             return Ok(languages);
         }

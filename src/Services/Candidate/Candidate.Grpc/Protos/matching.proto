@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Candidate.Grpc.Protos";
+
+service MatchingResumeProtoService {
+	rpc GetMatchingResume (GetMatchingResumeRequest) returns (MatchingResumeModel);
+}
+
+message GetMatchingResumeRequest {
+	int32 resumeId = 1;
+}
+
+message MatchingResumeModel {
+	int32 id = 1;
+	string gender = 2;
+	string additionalSkill = 3;
+	int32 careerId = 4;
+	repeated string skills = 5;
+	repeated string educationDegree = 6;
+	repeated int32 languages = 7;
+	double experienceYear = 8;
+}

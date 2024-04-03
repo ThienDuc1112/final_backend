@@ -1,4 +1,5 @@
-﻿using Provider.Domain.Entities;
+﻿using Provider.Application.DTOs.Skill;
+using Provider.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Provider.Application.Contracts.Persistence
         Task<IEnumerable<Skill>> GetSkillsByCarrerId(int carrerId);
         Task<bool> IsExisted(string nameSkill);
         Task<List<Skill>> GetActiveSkills();
+        Task<GetSkillAdminListDTO> GetSkillsByAdmin(int page, int carrerId);
     }
 }

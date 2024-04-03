@@ -36,7 +36,7 @@ namespace AuthenticationSever.Controllers
             return status;
         }
         [HttpGet("test")]
-        //[Authorize(Roles ="admin")]
+        [Authorize]
         public async Task<ActionResult> Get()
         {
             string test = "test";
