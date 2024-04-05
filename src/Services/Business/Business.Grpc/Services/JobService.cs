@@ -27,6 +27,7 @@ namespace Business.Grpc.Services
             }
             logger.LogInformation($"Job is retrieved: {job.Title} - {job.Id}");
             var jobModel = mapper.Map<JobModel>(job);
+            jobModel.ExpirateDate = job.ExpiratedDate.ToString("yyyy-MM-dd HH:mm:ss");
             return jobModel;
 
         }

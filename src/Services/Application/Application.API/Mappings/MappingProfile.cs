@@ -1,4 +1,5 @@
 ﻿using Application.Domain.DTOs.AppliedJob;
+using Application.Domain.DTOs.FavoriteJob;
 using Application.Domain.DTOs.InterviewSchedule;
 using Application.Domain.Entities;
 using AutoMapper;
@@ -21,7 +22,8 @@ namespace Application.API.Mappings
             CreateMap<InterviewSchedule, GetInterviewDTO>().ReverseMap();
             CreateMap<InterviewSchedule, UpdateAppliedJobDTO>();
 
-
+            CreateMap<FavoriteJob, CreateFavoriteJobDTO>().ReverseMap();
+            CreateMap<FavoriteJob, GetFavoriteJobDTO>().ReverseMap();
         }
     }
 }

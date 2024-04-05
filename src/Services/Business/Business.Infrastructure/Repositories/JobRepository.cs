@@ -202,7 +202,8 @@ namespace Business.Infrastructure.Repositories
                     BusinessId = x.BusinessId,
                     BusinessName = x.Business.FullName,
                     NumberRecruitment = x.NumberRecruitment,
-                    AvatarUrl = x.Business.LogoUrl
+                    AvatarUrl = x.Business.LogoUrl,
+                    ExpiratedDate = x.ExpirationDate
                 }).FirstOrDefaultAsync();
 
             return job;

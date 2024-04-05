@@ -22,10 +22,10 @@ namespace Application.API.Controllers
             _jobGrpcService = jobGrpcService;
         }
 
-        [HttpGet("{resumeId}")]
+        [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<MatchingList>> GetMatching(int resumeId, int jobId)
+        public async Task<ActionResult<MatchingList>> GetMatching([FromQuery(Name = "resumeId")] int resumeId, [FromQuery(Name = "jobId")] int jobId)
         {
             MatchingResumeModel resume = await _resumeGrpcService.GetMatchingResume(resumeId);
             MatchingJobModel job = await _jobGrpcService.GetMatchingJob(jobId);
@@ -41,7 +41,7 @@ namespace Application.API.Controllers
             var emptyData = new List<TextData>();
             var data = context.Data.LoadFromEnumerable(emptyData);
             var tokenization = context.Transforms.Text.TokenizeIntoWords("Tokens", "Text",
-                    separators: new[] { ' ', '.', ',', '•', '/','(',')',':' })
+                    separators: new[] { ' ', '.', ',', '•', '/','(',')',':',';' })
                 .Append(context.Transforms.Text.RemoveDefaultStopWords("Tokens", "Tokens",
                     Microsoft.ML.Transforms.Text.StopWordsRemovingEstimator.Language.English));
 
@@ -147,7 +147,7 @@ namespace Application.API.Controllers
             if(resume.EducationDegree.Any(d => d.Equals(job.EducationLevelMin)))
             {
                 score += 15;
-                var item = new MatchingItem() { IsMatch = true, Name = $"Candidate's education degree matches with the job {job.EducationLevelMin}" };
+                var item = new MatchingItem() { IsMatch = true, Name = $"Candidate meets education degree requirement" };
                 matchingList.MatchingItems.Add(item);
             }
             else
@@ -159,7 +159,7 @@ namespace Application.API.Controllers
             if(resume.ExperienceYear >= yearRequirement)
             {
                 score += 20;
-                var item = new MatchingItem() { IsMatch = true, Name = "Candidate's working experience matches with the job" };
+                var item = new MatchingItem() { IsMatch = true, Name = "Candidate meets working experience requirement" };
                 matchingList.MatchingItems.Add(item);
             }
             else
@@ -182,12 +182,12 @@ namespace Application.API.Controllers
             if(resume.Languages.Any(l => l.Equals(job.LanguageRequirementId)))
             {
                 score += 10;
-                var item = new MatchingItem() { IsMatch = true, Name = "Candidate meets the gender requirement" };
+                var item = new MatchingItem() { IsMatch = true, Name = "Candidate meets the language requirement" };
                 matchingList.MatchingItems.Add(item);
             }
             else
             {
-                var item = new MatchingItem() { IsMatch = false, Name = $"Candidate doesn't meet the language requirement: {job.LanguageRequirementId} - {resume.Languages[0]}" };
+                var item = new MatchingItem() { IsMatch = false, Name = $"Candidate doesn't meet the language requirement" };
                 matchingList.MatchingItems.Add(item);
             }
 
@@ -196,8 +196,9 @@ namespace Application.API.Controllers
             double similarity = CalculateCosineSimilarity(resumeSkills, jobSkills);
 
             score = score + (similarity * 25);
-            var itemSkill = new MatchingItem() { IsMatch = true, Name = $"The matching rate of skills between job and candidate: {jobSkills} - {resumeSkills}" };
+            var itemSkill = new MatchingItem() { IsMatch = true, Name = $"Matching rate of skills between job and candidate: {similarity}%" };
             matchingList.MatchingItems.Add(itemSkill);
+            matchingList.Score = score;
 
             return matchingList;
         }

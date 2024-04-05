@@ -14,5 +14,6 @@ namespace Business.Application.DTOs.Job
         public string BusinessName { get; set; }
         public int BusinessId { get; set; }
         public string AvatarUrl { get; set; }
+        public DateTime ExpiratedDate { get; set; }
     }
 }

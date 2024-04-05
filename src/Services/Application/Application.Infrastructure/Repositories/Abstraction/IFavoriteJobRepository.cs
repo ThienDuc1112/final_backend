@@ -9,6 +9,7 @@ namespace Application.Infrastructure.Repositories.Abstraction
 {
     public interface IFavoriteJobRepository : IGenericRepository<FavoriteJob>
     {
-
+        Task<bool> IsExisted(string candidateId, int jobId);
+        Task<List<FavoriteJob>> GetFavoriteJobs(string candidateId);
     }
 }

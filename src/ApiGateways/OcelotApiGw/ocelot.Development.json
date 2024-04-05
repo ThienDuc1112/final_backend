@@ -648,6 +648,54 @@
       "UpstreamPathTemplate": "/Message",
       "UpstreamHttpMethod": [ "PUT" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/v1/Matching",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Matching"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob/{candidateId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/FavoriteJob/{candidateId}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/FavoriteJob"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "UpstreamPathTemplate": "/FavoriteJob/{id}"
+    },
     // Authentication service
     {
       "DownstreamPathTemplate": "/connect/userinfo",
@@ -660,6 +708,19 @@
       ],
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/userinfo"
+    },
+    // ChatBot service
+    {
+      "DownstreamPathTemplate": "/api/v1/Chat/{userMessage}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7178"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Chat/{userMessage}"
     }
 
   ],

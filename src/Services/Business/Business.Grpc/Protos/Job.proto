@@ -18,5 +18,6 @@ message JobModel {
 	int32 businessId = 4;
 	string businessName = 5;
 	string avatarUrl = 6;
+	string expirateDate = 7;
 }
 
