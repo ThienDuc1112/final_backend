@@ -45,6 +45,32 @@ namespace Application.Infrastructure.Repositories.Implementation
             return applications;
         }
 
+        public async Task<GetRawAppliedJob> GetAppliedJobDashboard(int businessId)
+        {
+            var appCount = await _dbContext.AppliedJobs
+                .Where(a => a.BusinessId == businessId)
+                .CountAsync();
+               
+           var interviewCount = await _dbContext.AppliedJobs
+                 .Where(a => a.BusinessId == businessId && a.Status == "Interviewing")
+                .CountAsync();
+
+            var rawJobs = await _dbContext.AppliedJobs
+                .Where(a => a.BusinessId == businessId).
+                Select(a => new RawAppliedJob
+                {
+                    Id = a.Id,
+                    ResumeId = a.ResumeId,
+                    CreatedDate = a.CreatedDate,
+                    Status = a.Status,
+                })
+                .OrderByDescending(j => j.Id)
+                .Take(6)
+                .ToListAsync();
+            var data = new GetRawAppliedJob { ApplicationCount = appCount, InterviewCount = interviewCount, Jobs = rawJobs };
+            return data;
+        }
+
         public async Task<QueryAppliedJobDTO> GetAppliedJobDetailDTO(int id)
         {
             var application = await _dbContext.AppliedJobs.Where(a => a.Id == id)

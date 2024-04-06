@@ -23,6 +23,7 @@ namespace Candidate.Application.Mappings
             CreateMap<Resume, CreateResumeDTO>().ReverseMap();
             CreateMap<Resume, UpdateResumeDTO>().ReverseMap();
             CreateMap<Resume, GetResumeDTO>().ReverseMap();
+            CreateMap<Resume, HideResumeDTO>().ReverseMap();
 
             CreateMap<Education, EducationDTO>().ReverseMap();
             CreateMap<Education, CreateEducationDTO>().ReverseMap();

@@ -15,4 +15,10 @@ namespace Business.Application.DTOs.Job
         public int NumberRecruitment { get; set; }
         public DateTime ExpirationDate { get; set; }
     }
+
+    public class GetJobManagementListDTO
+    {
+        public List<GetJobManagementDTO> Jobs { get; set; } = new List<GetJobManagementDTO>();
+        public int TotalJob { get; set; }
+    }
 }

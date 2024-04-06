@@ -39,7 +39,7 @@ namespace Business.Infrastructure.Repositories
                 .Include(j => j.Business)
                 .AsNoTracking()
                 .ToListAsync();
-                
+
         }
 
         public async Task<Job> GetJobById(int id)
@@ -50,7 +50,32 @@ namespace Business.Infrastructure.Repositories
                 .FirstOrDefaultAsync(j => j.Id == id);
         }
 
-        public async Task<List<GetJobManagementDTO>> GetJobManagements(int? page, int businessId)
+        public async Task<GetJobDashBoard> GetJobDashBoard(int businessId)
+        {
+            var listJobs = await _dbContext.Jobs
+                .Where(j => j.BusinessId == businessId)
+                .Select(j => new GetJobManagementDTO
+                {
+                    Id = j.Id,
+                    CreatedDate = j.CreatedDate,
+                    Status = j.Status,
+                    ExpirationDate = j.ExpirationDate,
+                    NumberRecruitment = j.NumberRecruitment,
+                    Title = j.Title,
+                }).OrderByDescending(j => j.Id).Take(5).ToListAsync();
+
+            var total = await _dbContext.Jobs.CountAsync();
+
+            var job = new GetJobDashBoard
+            {
+                Jobs = listJobs,
+                TotalJob = total
+            };
+
+            return job;
+        }
+
+        public async Task<GetJobManagementListDTO> GetJobManagements(int? page, int businessId)
         {
             if (page == null) page = 1;
             int pageSize = 8;
@@ -67,7 +92,10 @@ namespace Business.Infrastructure.Repositories
                 Status = j.Status
             }).ToListAsync();
 
-            return jobs;
+            int total = await _dbContext.Jobs.CountAsync();
+
+
+            return new GetJobManagementListDTO { Jobs = jobs, TotalJob = total };
         }
 
         public async Task<List<GetJobDTO>> GetJobs(int? page, string? query, string? jobType,
@@ -207,6 +235,26 @@ namespace Business.Infrastructure.Repositories
                 }).FirstOrDefaultAsync();
 
             return job;
+        }
+
+        public async Task<List<GetJobDTO>> GetNewJobs()
+        {
+            return await _dbContext.Jobs.Select(j => new GetJobDTO
+            {
+                BusinessId = j.BusinessId,
+                FullName = j.Business.FullName,
+                LogoUrl = j.Business.LogoUrl,
+                Address = j.Business.Address,
+                Id = j.Id,
+                JobType = j.JobType,
+                Title = j.Title,
+                SalaryMax = j.SalaryMax,
+                SalaryMin = j.SalaryMin,
+                RequiredSkills = j.RequiredSkills,
+                ExpirationDate = j.ExpirationDate,
+                Description = j.Description
+            }).OrderByDescending(j => j.Id)
+            .Take(8).ToListAsync();
         }
     }
 }

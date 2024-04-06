@@ -165,6 +165,18 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Job/GetNewJobs",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetNewJobs",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Job/GetJobsByBusiness/{businessId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -200,6 +212,19 @@
       "UpstreamPathTemplate": "/GetJobApp",
       "UpstreamHttpMethod": [ "GET" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetDashboardJob/{businessId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetDashboardJob/{businessId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
     {
       "DownstreamPathTemplate": "/api/v1/Media/UploadMedia",
       "DownstreamScheme": "https",
@@ -368,6 +393,18 @@
         }
       ],
       "UpstreamPathTemplate": "/UpdateResume/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/HideResume",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7006"
+        }
+      ],
+      "UpstreamPathTemplate": "/HideResume",
       "UpstreamHttpMethod": [ "PUT" ]
     },
     //provider service
@@ -539,6 +576,18 @@
       ],
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/GetApplications"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetDashboardApplications/{businessId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetDashboardApplications/{businessId}"
     },
     {
       "DownstreamPathTemplate": "/api/v1/AppliedJob",

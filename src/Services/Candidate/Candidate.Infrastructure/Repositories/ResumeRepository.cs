@@ -68,7 +68,7 @@ namespace Candidate.Infrastructure.Repositories
         public async Task<List<Resume>> FindResumeByUserId(string userId)
         {
             var resume = await _dbcontext.Resumes
-                .Where(s => s.UserId == userId).ToListAsync();
+                .Where(s => s.UserId == userId && s.IsPublic == true).ToListAsync();
             return resume;
         }
 

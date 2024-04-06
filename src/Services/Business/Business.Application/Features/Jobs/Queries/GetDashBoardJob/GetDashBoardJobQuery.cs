@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Application.Features.Jobs.Queries.GetJobManagement
+namespace Business.Application.Features.Jobs.Queries.GetDashBoardJob
 {
-    public class GetJobManagementQuery : IRequest<GetJobManagementListDTO>
+    public class GetDashBoardJobQuery : IRequest<GetJobDashBoard>
     {
-        public int? Page { get; set; }
         public int BusinessId { get; set; }
     }
 }

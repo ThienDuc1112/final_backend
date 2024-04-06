@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Application.Features.Jobs.Queries.GetJobManagement
 {
-    public class GetJobManagementQueryHandler : IRequestHandler<GetJobManagementQuery, List<GetJobManagementDTO>>
+    public class GetJobManagementQueryHandler : IRequestHandler<GetJobManagementQuery, GetJobManagementListDTO>
     {
         private readonly IJobRepository _jobRepository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Business.Application.Features.Jobs.Queries.GetJobManagement
             _jobRepository = jobRepository;
             _mapper = mapper;
         }
-        public async Task<List<GetJobManagementDTO>> Handle(GetJobManagementQuery request, CancellationToken cancellationToken)
+        public async Task<GetJobManagementListDTO> Handle(GetJobManagementQuery request, CancellationToken cancellationToken)
         {
             var jobs = await _jobRepository.GetJobManagements(request.Page, request.BusinessId);
             return jobs;

@@ -22,5 +22,9 @@ namespace Application.Domain.DTOs.AppliedJob
 
         [Required(ErrorMessage = "BusinessUserId cannot be empty !!")]
         public string BusinessUserId { get; set; }
+
+        [Required(ErrorMessage = "BusinessId cannot be empty !!")]
+        [Range(1, long.MaxValue, ErrorMessage = "BusinessId must be greater than 0")]
+        public int BusinessId { get; set; }
     }
 }

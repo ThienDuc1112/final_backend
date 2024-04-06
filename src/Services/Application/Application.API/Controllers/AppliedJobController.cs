@@ -111,6 +111,41 @@ namespace Application.API.Controllers
             return Ok(appDTOs);
         }
 
+        [HttpGet("GetDashboardApplications/{businessId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult<GetAppliedJobDashboard>> GetDashboardApplications(int businessId)
+        {
+            var rawJobs = await _appliedJobRepository.GetAppliedJobDashboard(businessId);
+            if(rawJobs == null)
+            {
+                return NotFound();
+            }
+            var apps = new GetAppliedJobDashboard();
+            apps.ApplicationCount = rawJobs.ApplicationCount;
+            apps.InterviewCount = rawJobs.InterviewCount;
+
+            var resumeTasks = rawJobs.Jobs.Select(app => _resumeGrpcService.GetResume(app.ResumeId)).ToList();
+            var resumes = await Task.WhenAll(resumeTasks);
+
+
+            for (int i = 0; i < rawJobs.Jobs.Count; i++)
+            {
+                var app = new GetAppliedJobDTO();
+                var resume = resumes[i];
+                app.FullName = resume.FullName;
+                app.AvatarUrl = resume.AvatarUrl;
+                app.Title = resume.Title;
+                app.CreatedDate = rawJobs.Jobs[i].CreatedDate;
+                app.Id = rawJobs.Jobs[i].Id;
+                app.CreatedDate = rawJobs.Jobs[i].CreatedDate;
+                app.Status = rawJobs.Jobs[i].Status;
+                app.ResumeId = rawJobs.Jobs[i].ResumeId;
+                apps.Jobs.Add(app);
+            }
+
+            return apps;
+        }
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]

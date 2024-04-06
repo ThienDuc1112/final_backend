@@ -11,6 +11,7 @@ using Candidate.Application.Features.Experiences.Commands.UpdateExperience;
 using Candidate.Application.Features.LanguagesOfResume.Commands.CreateLanguageOfResume;
 using Candidate.Application.Features.LanguagesOfResume.Commands.UpdateLanguageOfResume;
 using Candidate.Application.Features.Resumes.Commands.CreateResume;
+using Candidate.Application.Features.Resumes.Commands.HideResume;
 using Candidate.Application.Features.Resumes.Commands.UpdateResume;
 using Candidate.Application.Features.Resumes.Queries.GetResume;
 using Candidate.Application.Features.Resumes.Queries.GetResumeByUser;
@@ -267,6 +268,15 @@ namespace Candidate.API.Controllers
             }
         }
 
+        [HttpPut("HideResume")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<BaseCommandResponse>> Hide([FromBody] HideResumeDTO dto)
+        {
+            var command = new HideResumeCommand { HideResumeDTO = dto };
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
     }
 }

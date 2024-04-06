@@ -12,6 +12,7 @@ namespace Application.Domain.Entities
         public string CandidateId { get; set; }
         public int JobId { get; set; }
         public int ResumeId { get; set; }
+        public int BusinessId { get; set; }
         public string Status { get; set; }
         public string? Url { get; set; }
     }

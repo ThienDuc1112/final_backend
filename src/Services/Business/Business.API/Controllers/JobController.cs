@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Newtonsoft.Json;
 using Business.Application.Features.Jobs.Queries.GetJobsFromBusiness;
+using Business.Application.Features.Jobs.Queries.GetDashBoardJob;
+using Business.Application.Features.Jobs.Queries.GetNewJob;
 
 namespace Business.API.Controllers
 {
@@ -35,8 +37,6 @@ namespace Business.API.Controllers
             [FromQuery(Name = "career")] int career, [FromQuery(Name = "experience")] string experience, [FromQuery(Name = "date")] string? date,
             [FromQuery(Name = "position")] string position, [FromQuery(Name = "education")] string education)
         {
-            _logger.LogWarning($"Received query: Query={query}, page={page}");
-            _logger.LogCritical($"Get data: {experience}, {position}");
 
             var getJobsQuery = new GetListJobQuery
             {
@@ -55,6 +55,20 @@ namespace Business.API.Controllers
             var jobs = await _mediator.Send(getJobsQuery);
             return Ok(jobs);
         }
+
+        [HttpGet("GetNewJobs")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetJobDTO>>> GetNewJobs()
+        {
+            var query = new GetNewJobQuery();
+            var jobs = await _mediator.Send(query);
+            if(jobs == null)
+            {
+                return NotFound();
+            }
+            return jobs;
+        }
+
         [HttpGet("GetJobsByBusiness/{businessId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<GetJobDTO>>> GetJobByBusiness( int businessId)
@@ -70,7 +84,7 @@ namespace Business.API.Controllers
 
         [HttpGet("GetJobManagement")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<List<GetJobManagementDTO>>> GetJobManagement([FromQuery(Name = "page")] int? page, [FromQuery(Name = "businessId")] int businessId)
+        public async Task<ActionResult<GetJobManagementListDTO>> GetJobManagement([FromQuery(Name = "page")] int? page, [FromQuery(Name = "businessId")] int businessId)
         {
             var getJobsQuery = new GetJobManagementQuery
             {
@@ -99,6 +113,15 @@ namespace Business.API.Controllers
         public async Task<ActionResult<GetJobDetailDTO>> GetJob(int id)
         {
             var query = new GetJobDetailQuery { Id = id };
+            var jobDetail = await _mediator.Send(query);
+
+            return Ok(jobDetail);
+        }
+        [HttpGet("GetDashboardJob/{businessId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetJobDetailDTO>> GetDashboardJob(int businessId)
+        {
+            var query = new GetDashBoardJobQuery { BusinessId = businessId };
             var jobDetail = await _mediator.Send(query);
 
             return Ok(jobDetail);
