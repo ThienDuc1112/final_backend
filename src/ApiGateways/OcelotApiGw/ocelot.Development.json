@@ -771,7 +771,6 @@
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/Chat/{userMessage}"
     }
-
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5011"
