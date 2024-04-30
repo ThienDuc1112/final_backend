@@ -1,4 +1,4 @@
-﻿using Candidate.Application.Contracts.Persistence;
+using Candidate.Application.Contracts.Persistence;
 using Candidate.Application.DTOs.Education;
 using Candidate.Application.DTOs.Experience;
 using Candidate.Application.DTOs.Resume;
