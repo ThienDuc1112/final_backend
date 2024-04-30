@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Application.Features.Jobs.Queries.GetListJob
 {
-    public class GetListJobQuery : IRequest<List<GetJobDTO>>
+    public class GetListJobQuery : IRequest<GetListJobDTO>
     {
         public int? Page { get; set; }
         public string? Query { get; set; }

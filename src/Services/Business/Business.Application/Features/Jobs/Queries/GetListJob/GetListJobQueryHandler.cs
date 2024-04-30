@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Application.Features.Jobs.Queries.GetListJob
 {
-    public class GetListJobQueryHandler : IRequestHandler<GetListJobQuery, List<GetJobDTO>>
+    public class GetListJobQueryHandler : IRequestHandler<GetListJobQuery, GetListJobDTO>
     {
         private readonly IJobRepository _jobRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace Business.Application.Features.Jobs.Queries.GetListJob
             _logger = logger;
         }
 
-        public async Task<List<GetJobDTO>> Handle(GetListJobQuery request, CancellationToken cancellationToken)
+        public async Task<GetListJobDTO> Handle(GetListJobQuery request, CancellationToken cancellationToken)
         {
             var jobs = await _jobRepository.GetJobs(
                                            request.Page,
@@ -38,7 +38,7 @@ namespace Business.Application.Features.Jobs.Queries.GetListJob
                                            request.Position,
                                            request.Education
                                            );
-            foreach(var job in jobs)
+            foreach(var job in jobs.GetJobDTOs)
             {
                 job.Skills = job.RequiredSkills.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
             }

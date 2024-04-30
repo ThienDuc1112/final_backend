@@ -493,6 +493,18 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Language/EnableLanguage/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5000"
+        }
+      ],
+      "UpstreamPathTemplate": "/EnableLanguage/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Career/GetCareersWithSkills",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -760,14 +772,14 @@
     },
     // ChatBot service
     {
-      "DownstreamPathTemplate": "/api/v1/Chat/{userMessage}",
-      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": "7178"
         }
       ],
+      "DownstreamPathTemplate": "/api/v1/Chat/{userMessage}",
+      "DownstreamScheme": "https",
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/Chat/{userMessage}"
     }

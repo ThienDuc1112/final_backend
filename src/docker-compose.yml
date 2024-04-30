@@ -9,3 +9,10 @@ services:
     build:
       context: .
       dockerfile: Services/Provider/Provider.API/Dockerfile
+
+  provider.grpc:
+    image: ${DOCKER_REGISTRY-}providergrpc
+    build:
+      context: .
+      dockerfile: Services\Provider\Provider.Grpc\Dockerfile
+

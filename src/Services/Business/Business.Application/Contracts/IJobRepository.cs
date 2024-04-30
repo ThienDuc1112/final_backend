@@ -12,7 +12,7 @@ namespace Business.Application.Contracts
     {
         Task<List<Job>> GetAllJobs();
 
-        Task<List<GetJobDTO>> GetJobs(int? page, string? query, string? jobType,
+        Task<GetListJobDTO> GetJobs(int? page, string? query, string? jobType,
             decimal? minSalary, decimal? maxSalary, int? career, List<string> experience,
             string date, List<string> position, List<string> education);
 

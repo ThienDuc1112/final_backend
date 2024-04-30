@@ -24,7 +24,14 @@ namespace Provider.Infrastructure.Repositories
             Language language = await _dbcontext.Languages.FirstOrDefaultAsync(x => x.Id == id);
             if (language != null)
             {
-                language.IsAvailable = true;
+                if(language.IsAvailable == true)
+                {
+                    language.IsAvailable = false;
+                }
+                else
+                {
+                    language.IsAvailable = true;
+                }
                 _dbcontext.Entry(language).State = EntityState.Modified;
                 await _dbcontext.SaveChangesAsync();
             }

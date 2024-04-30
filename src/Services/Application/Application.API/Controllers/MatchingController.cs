@@ -192,7 +192,7 @@ namespace Application.API.Controllers
             }
 
             var resumeSkills = string.Join(" ", resume.Skills) + " " + resume.AdditionalSkill;
-            var jobSkills = RemoveStopword(job.RequiredSkills) + RemoveStopword(job.Requirement);
+            var jobSkills = RemoveStopword(job.RequiredSkills);
             double similarity = CalculateCosineSimilarity(resumeSkills, jobSkills);
 
             score = score + (similarity * 25);

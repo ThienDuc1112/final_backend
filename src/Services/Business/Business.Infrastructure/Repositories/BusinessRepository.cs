@@ -70,7 +70,8 @@ namespace Business.Infrastructure.Repositories
 
         public async Task<BusinessInfor> GetBusinessID(string userId)
         {
-            return await _dbContext.Businesses.Where(b => b.UserId == userId).FirstOrDefaultAsync();
+            return await _dbContext.Businesses.Where(b => b.UserId == userId)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<BusinessInfor> GetBusinessInforWithRelevant(string Id)

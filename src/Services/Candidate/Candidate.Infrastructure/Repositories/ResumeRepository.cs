@@ -40,6 +40,7 @@ namespace Candidate.Infrastructure.Repositories
                     AvatarUrl = r.AvatarUrl,
                     Description = r.Description,
                     Title = r.Title,
+                    AdditionalSkills = r.AdditionalSkills,
                     Educations = r.Educations.Select(e => new Education
                     {
                         Id = e.Id,
@@ -47,7 +48,8 @@ namespace Candidate.Infrastructure.Repositories
                         Degree = e.Degree,
                         Major = e.Major,
                         StartDate = e.StartDate,
-                        EndDate = e.EndDate
+                        EndDate = e.EndDate,
+                        Description = e.Description
                     }).ToList(),
                     Experiences = r.Experiences.Select(e => new Experience
                     {

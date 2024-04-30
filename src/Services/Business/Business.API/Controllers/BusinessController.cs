@@ -67,8 +67,8 @@ namespace Business.API.Controllers
         public async Task<ActionResult<GetBusinessIdDTO>> GetBusinessID(string userId)
         {
             var query = new GetIDBusinessQuery { userId = userId };
-            var businessID = await _mediator.Send(query);
-            return Ok(businessID);
+            var business = await _mediator.Send(query);
+            return Ok(business);
         }
 
         [HttpPost(Name = "AddBusinessInfor")]

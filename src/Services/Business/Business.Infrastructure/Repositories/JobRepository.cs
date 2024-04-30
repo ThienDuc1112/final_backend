@@ -64,7 +64,7 @@ namespace Business.Infrastructure.Repositories
                     Title = j.Title,
                 }).OrderByDescending(j => j.Id).Take(5).ToListAsync();
 
-            var total = await _dbContext.Jobs.CountAsync();
+            var total = await _dbContext.Jobs.CountAsync(j => j.BusinessId == businessId);
 
             var job = new GetJobDashBoard
             {
@@ -98,12 +98,12 @@ namespace Business.Infrastructure.Repositories
             return new GetJobManagementListDTO { Jobs = jobs, TotalJob = total };
         }
 
-        public async Task<List<GetJobDTO>> GetJobs(int? page, string? query, string? jobType,
+        public async Task<GetListJobDTO> GetJobs(int? page, string? query, string? jobType,
             decimal? minSalary, decimal? maxSalary, int? career, List<string> experience,
             string date, List<string> position, List<string> education)
         {
             if (page == null) page = 1;
-            int pageSize = 8;
+            int pageSize = 6;
             int itemsToSkip = (int)(page - 1) * pageSize;
             IQueryable<Job> jobQuery = _dbContext.Jobs;
 
@@ -191,8 +191,11 @@ namespace Business.Infrastructure.Repositories
                 .Skip(itemsToSkip)
                 .Take(pageSize)
                 .ToListAsync();
+            
+            int total = await _dbContext.Jobs.CountAsync();
+            GetListJobDTO listJob = new GetListJobDTO { GetJobDTOs = jobs, Total = total };
 
-            return jobs;
+            return listJob;
         }
 
         public async Task<List<GetJobDTO>> GetJobsFromBusiness(int businessId)

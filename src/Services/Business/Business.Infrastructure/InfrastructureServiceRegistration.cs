@@ -19,7 +19,9 @@ namespace Business.Infrastructure
             services.AddDbContext<BusinessDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("BusinessConnectionString"));
+                    options.UseSqlServer(configuration.GetConnectionString("BusinessConnectionString"),
+                        b => b.EnableRetryOnFailure()
+                        );                
                 });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

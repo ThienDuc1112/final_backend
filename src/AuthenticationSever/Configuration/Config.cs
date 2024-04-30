@@ -61,7 +61,6 @@
                 AllowedCorsOrigins= { "http://localhost:3000" },
                 RefreshTokenUsage = TokenUsage.ReUse,
                 RefreshTokenExpiration = TokenExpiration.Sliding,
-                //AbsoluteRefreshTokenLifetime = 360000,
                 SlidingRefreshTokenLifetime = 360000,
 
             },

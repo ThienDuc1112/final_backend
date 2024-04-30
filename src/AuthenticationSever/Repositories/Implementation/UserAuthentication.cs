@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AuthenticationSever.Repositories.Implementation
 {
-    public class UserAuthentication: IUserAuthentication
+    public class UserAuthentication : IUserAuthentication
     {
         private readonly UserManager<ManageUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -21,7 +21,7 @@ namespace AuthenticationSever.Repositories.Implementation
         public async Task<Status> RegistrationAsync(RegisterDTO model)
         {
             var status = new Status();
-            if(model.Email == null)
+            if (model.Email == null)
             {
                 status.StatusCode = 0;
                 status.Message = "Please provide an email address";
