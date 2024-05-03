@@ -17,6 +17,7 @@ namespace Application.Infrastructure.Repositories.Abstraction
         Task<QueryAppliedJobDTO> GetAppliedJobDetailDTO(int id);
         Task<List<GetApplicationList>> GetApplicationList(string candidateId);
         Task<GetRawAppliedJob> GetAppliedJobDashboard(int businessId);
+        Task<List<GetInterviewCandidate>> GetInterviewCandidate(int? jobId);
 
     }
 }

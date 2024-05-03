@@ -22,8 +22,8 @@ namespace Application.API.Controllers
         private readonly JobGrpcService _jobGrpcService;
         private readonly IPublishEndpoint _publishEndpoint;
 
-      public AppliedJobController(IAppliedJobRepository appliedJobRepository, IMapper mapper, ResumeGrpcService resumeGrpcService,
-          JobGrpcService jobGrpcService, IPublishEndpoint publishEndpoint)
+        public AppliedJobController(IAppliedJobRepository appliedJobRepository, IMapper mapper, ResumeGrpcService resumeGrpcService,
+            JobGrpcService jobGrpcService, IPublishEndpoint publishEndpoint)
         {
             _appliedJobRepository = appliedJobRepository;
             _mapper = mapper;
@@ -73,7 +73,7 @@ namespace Application.API.Controllers
 
             var jobTasks = apps.Select(job => _jobGrpcService.GetJob(job.JobId)).ToList();
             var jobs = await Task.WhenAll(jobTasks);
-            for(int i = 0; i < jobs.Length; i++)
+            for (int i = 0; i < jobs.Length; i++)
             {
                 var job = jobs[i];
                 apps[i].BusinessName = job.BusinessName;
@@ -111,13 +111,37 @@ namespace Application.API.Controllers
             return Ok(appDTOs);
         }
 
+        [HttpGet("GetInterviewCandidate")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult<List<GetInterviewCandidate>>> GetInterviewCandidate([FromQuery(Name = "jobId")] int? jobId)
+        {
+            var interview = await _appliedJobRepository.GetInterviewCandidate(jobId);
+            if (interview == null)
+            {
+                return NotFound();
+            }
+
+            var resumeTasks = interview.Select(app => _resumeGrpcService.GetResume(app.ResumeId)).ToList();
+            var resumes = await Task.WhenAll(resumeTasks);
+            for (int i = 0; i < interview.Count; i++)
+            {
+                var resume = resumes[i];
+                interview[i].CandidateName = resume.FullName;
+                interview[i].CandidateTitle = resume.Title;
+                interview[i].CandidateAvatar = resume.AvatarUrl;
+            }
+
+            return interview;
+        }
+
         [HttpGet("GetDashboardApplications/{businessId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<GetAppliedJobDashboard>> GetDashboardApplications(int businessId)
         {
             var rawJobs = await _appliedJobRepository.GetAppliedJobDashboard(businessId);
-            if(rawJobs == null)
+            if (rawJobs == null)
             {
                 return NotFound();
             }
@@ -163,14 +187,7 @@ namespace Application.API.Controllers
             }
             else
             {
-                if (await _appliedJobRepository.IsExisted(appliedJobDTO.JobId, appliedJobDTO.CandidateId))
-                {
-                    response.Id = 0;
-                    response.Success = false;
-                    response.Message = "You have already applied to this job";
-                    
-                }
-                else
+                if (!await _appliedJobRepository.IsExisted(appliedJobDTO.JobId, appliedJobDTO.CandidateId))
                 {
                     response.Id = 1;
                     response.Success = true;
@@ -178,7 +195,6 @@ namespace Application.API.Controllers
                     var appliedJob = _mapper.Map<AppliedJob>(appliedJobDTO);
                     appliedJob.Status = "Pending";
                     await _appliedJobRepository.Add(appliedJob);
-                    /////////
                     var job = await _jobGrpcService.GetJob(appliedJob.JobId);
                     var resume = await _resumeGrpcService.GetResume(appliedJob.ResumeId);
                     var message = new SendingMessageEvent
@@ -191,8 +207,18 @@ namespace Application.API.Controllers
                         UserId = appliedJobDTO.BusinessUserId,
                     };
                     await _publishEndpoint.Publish(message);
+                    return Ok(response);
                 }
-                return Ok(response);
+                else
+                {
+
+                    response.Id = 0;
+                    response.Success = false;
+                    response.Message = "You have already applied to this job";
+                    return Ok(response);
+
+                }
+
             }
         }
 
@@ -215,7 +241,7 @@ namespace Application.API.Controllers
             else
             {
                 var app = await _appliedJobRepository.GetById(appliedJobDTO.Id);
-                if(app == null)
+                if (app == null)
                 {
                     response.Id = 0;
                     response.Success = false;
@@ -239,7 +265,7 @@ namespace Application.API.Controllers
                         Type = appliedJobDTO.Status,
                         FullName = "user"
                     };
-                 
+
                     await _publishEndpoint.Publish(message);
                 }
             }

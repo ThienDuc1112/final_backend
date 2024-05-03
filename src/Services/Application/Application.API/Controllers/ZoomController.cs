@@ -43,7 +43,7 @@ namespace Application.API.Controllers
                 type = 2,
                 start_time = meetingStartTime,
                 duration = meetingDuration,
-                timeZone = "UTC+7",
+                timeZone = "UTC",
                 settings = new
                 {
                     host_video = true,

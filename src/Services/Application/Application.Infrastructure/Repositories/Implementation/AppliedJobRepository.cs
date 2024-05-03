@@ -89,6 +89,28 @@ namespace Application.Infrastructure.Repositories.Implementation
             return application;
         }
 
+        public async Task<List<GetInterviewCandidate>> GetInterviewCandidate(int? jobId)
+        {
+            IQueryable<AppliedJob> interviewQuery = _dbContext.AppliedJobs;
+            if(jobId != null)
+            {
+                interviewQuery = interviewQuery.Where(i => i.JobId == jobId);
+            }
+
+            var interviews = await interviewQuery.Where(i => i.Status == "Interviewing" && i.Url != "")
+                .Select(i => new GetInterviewCandidate
+                {
+                    Id = i.Id,
+                    AppliedTime = i.CreatedDate,
+                    ResumeId = i.ResumeId,
+                    CandidateId = i.CandidateId,
+                    MeetingLink = i.Url,
+                    MeetingTime = i.Interviews.Any() ? i.Interviews[0].InterviewTime: new DateTime(),
+                }).ToListAsync();
+
+            return interviews;
+        }
+
         public async Task<bool> IsExisted(int jobId, string candidateId)
         {
             var isExisted = await _dbContext.AppliedJobs.AnyAsync(a => a.JobId == jobId && a.CandidateId == candidateId);

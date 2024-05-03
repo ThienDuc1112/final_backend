@@ -15,5 +15,6 @@ namespace Application.Domain.Entities
         public int BusinessId { get; set; }
         public string Status { get; set; }
         public string? Url { get; set; }
+        public List<InterviewSchedule> Interviews { get; set; }
     }
 }

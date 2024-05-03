@@ -590,6 +590,18 @@
       "UpstreamPathTemplate": "/GetApplications"
     },
     {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetInterviewCandidate",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetInterviewCandidate"
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/AppliedJob/GetDashboardApplications/{businessId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
