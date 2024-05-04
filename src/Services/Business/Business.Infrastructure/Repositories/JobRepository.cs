@@ -103,7 +103,7 @@ namespace Business.Infrastructure.Repositories
             string date, List<string> position, List<string> education)
         {
             if (page == null) page = 1;
-            int pageSize = 6;
+            int pageSize = 12;
             int itemsToSkip = (int)(page - 1) * pageSize;
             IQueryable<Job> jobQuery = _dbContext.Jobs;
 
@@ -173,6 +173,7 @@ namespace Business.Infrastructure.Repositories
             }
 
             var jobs = await jobQuery
+                .Where(j => j.Status != "Closed")
                 .Select(j => new GetJobDTO
                 {
                     BusinessId = j.BusinessId,
@@ -191,7 +192,7 @@ namespace Business.Infrastructure.Repositories
                 .Skip(itemsToSkip)
                 .Take(pageSize)
                 .ToListAsync();
-            
+
             int total = await _dbContext.Jobs.CountAsync();
             GetListJobDTO listJob = new GetListJobDTO { GetJobDTOs = jobs, Total = total };
 
@@ -242,21 +243,23 @@ namespace Business.Infrastructure.Repositories
 
         public async Task<List<GetJobDTO>> GetNewJobs()
         {
-            return await _dbContext.Jobs.Select(j => new GetJobDTO
-            {
-                BusinessId = j.BusinessId,
-                FullName = j.Business.FullName,
-                LogoUrl = j.Business.LogoUrl,
-                Address = j.Business.Address,
-                Id = j.Id,
-                JobType = j.JobType,
-                Title = j.Title,
-                SalaryMax = j.SalaryMax,
-                SalaryMin = j.SalaryMin,
-                RequiredSkills = j.RequiredSkills,
-                ExpirationDate = j.ExpirationDate,
-                Description = j.Description
-            }).OrderByDescending(j => j.Id)
+            return await _dbContext.Jobs
+                .Where(j => j.Status != "Closed")
+                .Select(j => new GetJobDTO
+                {
+                    BusinessId = j.BusinessId,
+                    FullName = j.Business.FullName,
+                    LogoUrl = j.Business.LogoUrl,
+                    Address = j.Business.Address,
+                    Id = j.Id,
+                    JobType = j.JobType,
+                    Title = j.Title,
+                    SalaryMax = j.SalaryMax,
+                    SalaryMin = j.SalaryMin,
+                    RequiredSkills = j.RequiredSkills,
+                    ExpirationDate = j.ExpirationDate,
+                    Description = j.Description
+                }).OrderByDescending(j => j.Id)
             .Take(8).ToListAsync();
         }
     }

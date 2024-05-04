@@ -34,8 +34,8 @@ namespace Business.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetListJobDTO>> GetListJob([FromQuery(Name = "page")] int? page, [FromQuery(Name = "query")] string? query,
             [FromQuery(Name = "jobType")] string? jobType, [FromQuery(Name = "minSalary")] int? minSalary, [FromQuery(Name = "maxSalary")] int? maxSalary,
-            [FromQuery(Name = "career")] int career, [FromQuery(Name = "experience")] string experience, [FromQuery(Name = "date")] string? date,
-            [FromQuery(Name = "position")] string position, [FromQuery(Name = "education")] string education)
+            [FromQuery(Name = "career")] int career, [FromQuery(Name = "experience")] string? experience, [FromQuery(Name = "date")] string? date,
+            [FromQuery(Name = "position")] string? position, [FromQuery(Name = "education")] string? education)
         {
 
             var getJobsQuery = new GetListJobQuery

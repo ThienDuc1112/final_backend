@@ -21,12 +21,11 @@ message MatchingJobModel {
 	int32 careerId = 8;
 	int32 businessId = 9;
 	string fullName = 10;
-	string logoUrl = 11;
-	string title = 12;
-	string jobType = 13;
-	int64 salaryMin = 14;
-	int64 salaryMax = 15;
-	string expirationDate = 16;
+	string title = 11;
+	string jobType = 12;
+	int64 salaryMin = 13;
+	int64 salaryMax = 14;
+	string expirationDate = 15;
 }
 
 message GetMatchingJobResponse {

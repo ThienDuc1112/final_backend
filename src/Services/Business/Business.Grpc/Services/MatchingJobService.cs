@@ -36,7 +36,6 @@ namespace Business.Grpc.Services
             model.FullName = job.Business.FullName;
             model.SalaryMin = (int)job.SalaryMin;
             model.SalaryMax = (int)job.SalaryMax;
-            model.LogoUrl = job.Business.LogoUrl;
             model.Title = job.Title;
             model.JobType = job.JobType;
             model.ExpirationDate = job.ExpirationDate.ToString("yyyy-MM-dd HH:mm:ss");

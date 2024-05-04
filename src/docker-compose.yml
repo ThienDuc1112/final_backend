@@ -2,7 +2,13 @@ version: '3.4'
 
 services:
   providerdb:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  notificationdb:
+    image: mongo
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
 
   provider.api:
     image: ${DOCKER_REGISTRY-}providerapi
@@ -14,5 +20,61 @@ services:
     image: ${DOCKER_REGISTRY-}providergrpc
     build:
       context: .
-      dockerfile: Services\Provider\Provider.Grpc\Dockerfile
+      dockerfile: Services/Provider/Provider.Grpc/Dockerfile
 
+  business.api:
+    image:  ${DOCKER_REGISTRY-}businessapi
+    build:
+      context: .
+      dockerfile: Services/Business/Business.API/Dockerfile
+
+  candidate.api:
+    image: ${DOCKER_REGISTRY-}candidateapi
+    build:
+      context: .
+      dockerfile: Services/Candidate/Candidate.API/Dockerfile
+
+  business.grpc:
+    image: ${DOCKER_REGISTRY-}businessgrpc
+    build:
+      context: .
+      dockerfile: Services/Business/Business.Grpc/Dockerfile
+
+  candidate.grpc:
+    image: ${DOCKER_REGISTRY-}candidategrpc
+    build:
+      context: .
+      dockerfile: Services/Candidate/Candidate.Grpc/Dockerfile
+ 
+  chatbot.api:
+    image: ${DOCKER_REGISTRY-}chatbotapi
+    build:
+      context: .
+      dockerfile: Services/ChatBot/Recruitment.ChatBot.API/Dockerfile
+
+  application.api:
+    image: ${DOCKER_REGISTRY-}applicationapi
+    build:
+      context: .
+      dockerfile: Services/Application/Application.API/Dockerfile
+
+  notification.api:
+    image: ${DOCKER_REGISTRY-}notificationapi
+    build:
+      context: .
+      dockerfile: Services/Notification/Notification.API/Dockerfile
+
+  authentication.api:
+    image: ${DOCKER_REGISTRY-}authenticationapi
+    build:
+      context: .
+      dockerfile: AuthenticationSever/Dockerfile
+
+  ocelotapigw:
+    image: ${DOCKER_REGISTRY-}ocelotapigw
+    build:
+      context: .
+      dockerfile: ApiGateways/OcelotApiGw/Dockerfile
+
+volumes:
+  mongo_data:

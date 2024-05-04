@@ -782,6 +782,18 @@
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/userinfo"
     },
+    {
+      "DownstreamPathTemplate": "/connect/token",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5007"
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/connect/token"
+    },
     // ChatBot service
     {
       "DownstreamHostAndPorts": [

@@ -1,36 +1,120 @@
 version: '3.4'
 
 services:
-  providerdb:
-    container_name: providerdb
-    environment:
-        SA_PASSWORD: "SwN12345678"
-        ACCEPT_EULA: "Y"
+  notificationdb:
+    container_name: notificationdb
+    restart: always
+    ports: 
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  rabbitmq:
+    container_name: rabbitmq
     restart: always
     ports:
-        - "1433:1433"      
+        - "5672:5672"
+        - "15672:15672"
 
   provider.api:
     container_name: provider.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:ProviderConnectionString=Server=providerdb;Database=ProviderDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
-    depends_on:
-        - providerdb
+      - "ConnectionStrings:ProviderConnectionString=Server=host.docker.internal, 1433;Database=ProviderDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
     ports:
-       - "8080:80"
+       - "8001:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
   provider.grpc:
     container_name: provider.grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:ProviderConnectionString=Server=providerdb;Database=ProviderDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
-   depends_on:
-        - providerdb
+      - "ConnectionStrings:ProviderConnectionString=Server=host.docker.internal, 1433;Database=ProviderDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
     ports:
        - "8002:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro
+
+  business.api:
+    container_name: business.api
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:Server=finalprojectvn.database.windows.net;Database=BusinessDb;User Id=adminBusinessDb;Password=Ducthien111@;MultipleActiveResultSets=true;TrustServerCertificate=True;Connection Timeout=30;ConnectRetryCount=255;"
+      - "GrpcSettings:GrpcUrl=http://provider.grpc"
+    ports:
+       - "8003:80"
+
+  candidate.api:
+    container_name: candidate.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:CandidateConnectionString=Server=host.docker.internal, 1433;Database=CandidateDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+      - "GrpcSettings:GrpcUrl=http://provider.grpc"
+    ports:
+       - "8004:80"
+
+  business.grpc:
+    container_name: business.grpc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:Server=finalprojectvn.database.windows.net;Database=BusinessDb;User Id=adminBusinessDb;Password=Ducthien111@;MultipleActiveResultSets=true;TrustServerCertificate=True;Connection Timeout=30;ConnectRetryCount=255;"
+    ports:
+       - "8005:80"
+
+  candidate.grpc:
+    container_name: candidate.grpc
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:CandidateConnectionString=Server=host.docker.internal, 1433;Database=CandidateDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+    ports:
+       - "8006:80"
+
+  chatbot.api:
+    container_name: chatbot.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+       - "8007:80"
+   
+  application.api: 
+    container_name: application.api
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - "ConnectionStrings:ApplicationConnectionString=Server=host.docker.internal, 1433;Database=ApplicationDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+       - "GrpcSettings:GrpcJobUrl=http://business.grpc"
+       - "GrpcSettings:GrpcResumeUrl=http://candidate.grpc"
+       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports: 
+      - "8008:80"
+
+  notification.api:
+    container_name: notification.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://notificationdb:27017"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports: 
+      - "8009:80"
+
+  authentication.api:
+    container_name: authentication.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:AuthenticationConnectionString=Server=host.docker.internal, 1433;Database=AuthenticationDb;User Id=sa;Password=SwN12345678;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+    ports:
+      - "8010:80"
+
+  ocelotapigw:
+    container_name: ocelotapigw
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - provider.api
+      - business.api
+      - candidate.api
+      - chatbot.api
+      - application.api
+      - notification.api
+    ports:
+      - "8011:80"
+

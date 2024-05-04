@@ -1,0 +1,814 @@
+{
+  "Routes": [
+    //Business service
+    {
+      "DownstreamPathTemplate": "/api/v1/Area/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Area/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Media/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Media/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business/BusinessInforDetail/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/BusinessInforDetail/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business/BusinessDetail/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/BusinessDetail/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business/BusinessID/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/BusinessID/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business/BusinessList",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/BusinessList",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Business",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Business",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Business/ReviewBusiness",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ReviewBusiness",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Job/",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "3s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Job/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Job",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetListJob",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetListJob",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetNewJobs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetNewJobs",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetJobsByBusiness/{businessId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetJobsByBusiness/{businessId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetJobManagement",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetJobManagement",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetJobApp",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetJobApp",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Job/GetDashboardJob/{businessId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetDashboardJob/{businessId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Media/UploadMedia",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Media/UploadMedia",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Provider/GetBusinessSize",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Provider/GetBusinessSize",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Provider/GetCareerLevel",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Provider/GetCareerLevel",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Provider/GetEducationLevel",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Provider/GetEducationLevel",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Provider/GetExperienceYear",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Provider/GetExperienceYear",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Provider/GetJobType",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "business.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Provider/GetJobType",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Candidate service
+    {
+      "DownstreamPathTemplate": "/api/v1/Education/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Education/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Experience/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Experience/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/LanguageOfResume/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/LanguageOfResume/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/SkillOfResume/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/SkillOfResume/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/ViewResume/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ViewResume/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/GetResume/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetResume/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/DesignYourResume",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/DesignResume",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/UpdateResume/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateResume/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Resume/HideResume",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "candidate.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/HideResume",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //provider service
+    {
+      "DownstreamPathTemplate": "/api/v1/Career",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllCareer",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Career/GetAdminCareers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdminCareers",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Career",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Career",
+      "UpstreamHttpMethod": [ "PUT", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Career/TriggerCareer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/TriggerCareer",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Language/GetLanguages",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetLanguages",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Language/GetAdminLanguages",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdminLanguages",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Language",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Language",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Language/EnableLanguage/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/EnableLanguage/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Career/GetCareersWithSkills",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetCareersWithSkills",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Skill/GetSkillsByAdmin",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetSkillsByAdmin",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Skill/TriggerSkill",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/TriggerSkill",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Skill",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Skill",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    // Application service
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetApplicationDetail/{id}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetAppsUser/{candidateId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetAppsUser/{candidateId}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetApplications",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetApplications"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetInterviewCandidate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetInterviewCandidate"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/GetDashboardApplications/{businessId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/GetDashboardApplications/{businessId}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AppliedJob",
+      "UpstreamHttpMethod": [ "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/AppliedJob/UpdatingMeeting",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdatingMeeting",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Interview",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Interview",
+      "UpstreamHttpMethod": [ "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Interview/{applicationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Interview/{applicationId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Zoom/{date}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "application.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Zoom/{date}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Message/GetMessagesByUser/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notification.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetMessagesByUser/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Message/GetNewMessageCount/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notification.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetNewMessageCount/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Message/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notification.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Message/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Message",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notification.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Message",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Matching",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Matching"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob/{candidateId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/FavoriteJob/{candidateId}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/FavoriteJob"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/FavoriteJob/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "provider.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "UpstreamPathTemplate": "/FavoriteJob/{id}"
+    },
+    // Authentication service
+    {
+      "DownstreamPathTemplate": "/connect/userinfo",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/userinfo"
+    },
+    {
+      "DownstreamPathTemplate": "/connect/token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/connect/token"
+    },
+    // ChatBot service
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatbot.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/Chat/{userMessage}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Chat/{userMessage}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5011"
+  }
+}
