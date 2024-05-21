@@ -18,5 +18,9 @@ The overall picture of implementations on my project using microservices.
 + Use Rate-Limiting to prevent DDOS attacks
 + Use Caching to enhance the performance of the system
 
+**Architecture**
++ Implementing DDD, CQRS, Microservice, and Clean Architecture 
++ Developing CQRS using MediatR, FluentValidation, and AutoMapper
++ Using Entity Framework Core ORM (Code first approach + LINQ)
   
 
